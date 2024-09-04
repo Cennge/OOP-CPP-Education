@@ -2,10 +2,26 @@
 
 using namespace std;
 
-void hello() {
-    cout << "Helo World!" << endl;
-}
+class Point
+{
+private:
+	int x, y;
+public:
+	void Print() {
+		cout << "x: " << x << endl << "y: " << y << endl;
+	}
+	void Init(int a, int b) {
+		x = a;
+		y = b;
+	}
+};
 
-int main(){
-    hello(); 
+int main() {
+	Point a;
+	a.Init(1, 2);
+	a.Print();
+
+	Point b; 
+	b.Init(3, 4);
+	b.Print();
 }
