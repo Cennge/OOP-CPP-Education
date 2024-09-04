@@ -2,32 +2,30 @@
 
 using namespace std;
 
-class Point
+class Fractions
 {
 private:
-	int x, y;
+	double numerator, denominator;
 public:
-	void Print() {
-		cout << "x: " << x << endl << "y: " << y << endl;
+	void init(int x, int y) {
+		if (y == 0) {
+			cout << "Error: Denominator cannot be zero" << endl;
+			numerator = 0;
+			denominator = 1;
+		}
+		else {
+			numerator = x;
+			denominator = y;
+		}
 	}
-	void Init(int a, int b) {
-		x = a;
-		y = b;
-	}
-	int GetX() {
-		return x;
-	}
-	int GetY() {
-		return y;
+	void printFractions() {
+		cout << numerator << " / " << denominator << " = " << numerator / denominator << endl;
 	}
 };
 
 int main() {
-	Point a;
-	a.Init(1, 2);
-	a.Print();
-
-	Point b; 
-	b.Init(3, 4);
-	b.Print();
+	Fractions frac1;
+	
+	frac1.init(2, 4);
+	frac1.printFractions();
 }
