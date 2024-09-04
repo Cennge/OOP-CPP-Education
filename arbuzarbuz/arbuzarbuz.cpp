@@ -14,6 +14,12 @@ public:
 		x = a;
 		y = b;
 	}
+	int GetX() {
+		return x;
+	}
+	int GetY() {
+		return y;
+	}
 };
 
 int main() {
