@@ -2,91 +2,95 @@
 
 using namespace std;
 
-//	Реализуйте конструкторы (перегружаем!), методы для ввода данных,
-//  для выполнения арифметических операций (сложение, вычитание, умножение, деление, и т.д.)
-//  и для вывода данных. Реализовать методы аксессоры для работы с отдельными полями класса!
-
-class Fractions
-{
+class Fractions {
 private:
-	double numerator, denominator;
+    double numerator, denominator;
+
 public:
-	Fractions() {
-		numerator = 1;
-		denominator = 1;
-	}
-	Fractions(int a, int b) {
-		if (b == 0) {
-			cout << "Error: Denominator cannot be zero" << endl;
-			numerator = 0;
-			denominator = 1;
-		}
-		else {
-			numerator = a;
-			denominator = b;
-		}
-	}
+    // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂС‹
+    Fractions() {
+        numerator = 1;
+        denominator = 1;
+    }
 
-	//инициализация и вывод
-	void init(int x, int y) {
-		if (y == 0) {
-			cout << "Error: Denominator cannot be zero" << endl;
-			numerator = 0;
-			denominator = 1;
-		}
-		else {
-			numerator = x;
-			denominator = y;
-		}
-	}
-	void printFractions() {
-		cout << numerator << " " << denominator << endl;
-	}
-	
+    Fractions(int a, int b) {
+        if (b == 0) {
+            cout << "Error: Denominator cannot be zero" << endl;
+            numerator = 0;
+            denominator = 1;
+        } else {
+            numerator = a;
+            denominator = b;
+        }
+    }
 
-	// арифметические приколы
-	Fractions Sum(Fractions& b)	{
-		Fractions rez(numerator + b.numerator, denominator + b.denominator);
-		return rez;
-	}
-	Fractions Minus(Fractions& b) {
-		Fractions rez(numerator - b.numerator, denominator - b.denominator);
-		return rez;
-	}
-	Fractions Multiplication(Fractions& b) {
-		Fractions rez(numerator * b.numerator, denominator * b.denominator);
-		return rez;
-	}
-	Fractions Divide(Fractions& b) {
-		Fractions rez(numerator / b.numerator, denominator / b.denominator);
-		return rez;
-	}
-	
-	//аксессоры 
-	void setNumerator(int a) {
-		numerator = a;
-	}
-	void setDenominator(int b) {
-		if (b == 0) {
-			cout << "Error: Denominator cannot be zero" << endl;
-			denominator = 1;
-		}
-		else {
-			denominator = b;
-		}
-	}
-	void getNumerator() {
-		cout << numerator << endl;
-	}
-	void getDenominator(){
-		cout << denominator << endl;
-	}
+    // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ
+    void init(int x, int y) {
+        if (y == 0) {
+            cout << "Error: Denominator cannot be zero" << endl;
+            numerator = 0;
+            denominator = 1;
+        } else {
+            numerator = x;
+            denominator = y;
+        }
+    }
+
+    // Р’С‹РІРѕРґ РґСЂРѕР±Рё
+    void printFraction() {
+        cout << numerator << " / " << denominator << endl;
+    }
+
+    // РђСЂРёС„РјРµС‚РёС‡РµСЃРєРёРµ РѕРїРµСЂР°С†РёРё
+    Fractions Sum(Fractions& b) {
+        Fractions rez(numerator + b.numerator, denominator + b.denominator);
+        return rez;
+    }
+
+    Fractions Minus(Fractions& b) {
+        Fractions rez(numerator - b.numerator, denominator - b.denominator);
+        return rez;
+    }
+
+    Fractions Multiplication(Fractions& b) {
+        Fractions rez(numerator * b.numerator, denominator * b.denominator);
+        return rez;
+    }
+
+    Fractions Divide(Fractions& b) {
+        Fractions rez(numerator / b.numerator, denominator / b.denominator);
+        return rez;
+    }
+
+    // РЎРµС‚С‚РµСЂС‹ Рё РіРµС‚С‚РµСЂС‹
+    void setNumerator(int a) {
+        numerator = a;
+    }
+
+    void setDenominator(int b) {
+        if (b == 0) {
+            cout << "Error: Denominator cannot be zero" << endl;
+            denominator = 1;
+        } else {
+            denominator = b;
+        }
+    }
+
+    int getNumerator() {
+        return numerator;
+    }
+
+    int getDenominator() {
+        return denominator;
+    }
 };
 
 int main() {
-	Fractions frac1(2,4);
-	Fractions frac2(3,5);
+    Fractions frac1(2, 4);
+    Fractions frac2(3, 5);
 
-	frac1.Sum(frac2);
-	frac1.printFractions();
+    Fractions result = frac1.Sum(frac2);
+    result.printFraction();
+
+    return 0;
 }
