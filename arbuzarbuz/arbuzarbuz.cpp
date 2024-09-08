@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cstring> // Для strlen и strcpy_s
+#include <cstring>
 #include <Windows.h>
 using namespace std;
 
@@ -61,7 +61,7 @@ public:
     // Сеттеры
     void setName(const char* name1) {
         if (name != nullptr) {
-            delete[] name;  // Освобождаем старую память
+            delete[] name;  
         }
         name = new char[strlen(name1) + 1];
         strcpy_s(name, strlen(name1) + 1, name1);
