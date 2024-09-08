@@ -1,96 +1,111 @@
-#include <iostream>
-
+#include<iostream>
+#include<Windows.h>
 using namespace std;
 
-class Fractions {
-private:
-    double numerator, denominator;
-
+class Car {
+	char* model;
+	char* country;
+	double price;
+	int year;
 public:
-    // Конструкторы
-    Fractions() {
-        numerator = 1;
-        denominator = 1;
-    }
+	Car() {
+		model = nullptr;
+		country = nullptr;
+		price = 0;
+		year = 0;
+	}
 
-    Fractions(int a, int b) {
-        if (b == 0) {
-            cout << "Error: Denominator cannot be zero" << endl;
-            numerator = 0;
-            denominator = 1;
-        } else {
-            numerator = a;
-            denominator = b;
-        }
-    }
+	Car(const char* model1, const char* country1, double price1, int year1) {
+		model = new char[strlen(model1) + 1];
+		strcpy_s(model, strlen(model1) + 1, model1);
 
-    // Инициализация
-    void init(int x, int y) {
-        if (y == 0) {
-            cout << "Error: Denominator cannot be zero" << endl;
-            numerator = 0;
-            denominator = 1;
-        } else {
-            numerator = x;
-            denominator = y;
-        }
-    }
+		country = new char[strlen(country1) + 1];
+		strcpy_s(country, strlen(country1) + 1, country1);
 
-    // Вывод дроби
-    void printFraction() {
-        cout << numerator << " / " << denominator << endl;
-    }
+		price = price1;
+		year = year1;
+	}
 
-    // Арифметические операции
-    Fractions Sum(Fractions& b) {
-        Fractions rez(numerator + b.numerator, denominator + b.denominator);
-        return rez;
-    }
+	~Car() {
+		delete[] model;
+		delete[] country;
+	}
 
-    Fractions Minus(Fractions& b) {
-        Fractions rez(numerator - b.numerator, denominator - b.denominator);
-        return rez;
-    }
+	void SetModel(const char* NemModel) {
+		if (model != nullptr) delete[] model;
+		model = new char[strlen(NemModel) + 1];
+		strcpy_s(model, strlen(NemModel) + 1, NemModel);
+	}
 
-    Fractions Multiplication(Fractions& b) {
-        Fractions rez(numerator * b.numerator, denominator * b.denominator);
-        return rez;
-    }
+	void SetCountry(const char* NemCountry) {
+		if (country != nullptr) delete[] country;
+		country = new char[strlen(NemCountry) + 1];
+		strcpy_s(country, strlen(NemCountry) + 1, NemCountry);
+	}
 
-    Fractions Divide(Fractions& b) {
-        Fractions rez(numerator / b.numerator, denominator / b.denominator);
-        return rez;
-    }
+	void SetPrice(int NewPrice) {
+		price = NewPrice;
+	}
 
-    // Сеттеры и геттеры
-    void setNumerator(int a) {
-        numerator = a;
-    }
+	void SetYear(int NewYear) {
+		year = NewYear;
+	}
 
-    void setDenominator(int b) {
-        if (b == 0) {
-            cout << "Error: Denominator cannot be zero" << endl;
-            denominator = 1;
-        } else {
-            denominator = b;
-        }
-    }
+	const char* GetModel() {
+		return model;
+	}
 
-    int getNumerator() {
-        return numerator;
-    }
+	const char* GetCountry() {
+		return country;
+	}
 
-    int getDenominator() {
-        return denominator;
-    }
+	double GetPrice() {
+		return price;
+	}
+
+	int GetYear() {
+		return year;
+	}
+
+	void Input() {
+		char bufferModel[100];
+		char bufferCountry[100];
+
+		cout << "Enter model: ";
+		cin.ignore();
+		cin.getline(bufferModel, 100);
+
+		cout << "Enter country: ";
+		cin.getline(bufferCountry, 100);
+
+		cout << "Enter price: ";
+		cin >> price;
+		cin.ignore();
+
+		cout << "Enter year: ";
+		cin >> year;
+		cin.ignore();
+
+		SetModel(bufferModel);
+		SetCountry(bufferCountry);
+	}
+
+	void PrintCar() {
+		cout << "Model: " << model << endl;
+		cout << "Country: " << country << endl;
+		cout << "Price: " << price << endl;
+		cout << "Year: " << year << endl;
+	}
 };
 
 int main() {
-    Fractions frac1(2, 4);
-    Fractions frac2(3, 5);
+	Car car1("Bmw", "Germany", 49000, 2018);
+	cout << car1.GetModel() << endl;
 
-    Fractions result = frac1.Sum(frac2);
-    result.printFraction();
+	Car car2;
+	car2.Input();
+	cout << car2.GetCountry() << endl;
 
-    return 0;
+	system("pause");
+	return 0;
 }
