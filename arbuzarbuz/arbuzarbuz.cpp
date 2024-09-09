@@ -1,96 +1,70 @@
-#include <iostream>
-
+#include<iostream>
+#include<Windows.h>
 using namespace std;
 
-class Fractions {
-private:
-    double numerator, denominator;
-
+class Student
+{
+    char* name;
+    int age;
 public:
-    // Конструкторы
-    Fractions() {
-        numerator = 1;
-        denominator = 1;
+    Student() // construct by default
+    {
+        name = nullptr;
+        age = 0;
     }
-
-    Fractions(int a, int b) {
-        if (b == 0) {
-            cout << "Error: Denominator cannot be zero" << endl;
-            numerator = 0;
-            denominator = 1;
-        } else {
-            numerator = a;
-            denominator = b;
+    Student(const char* Name) {
+        name = new char[strlen(Name) + 1];
+        strcpy_s(name, strlen(Name) + 1, Name);
+    }
+    Student(const char* Name, int Age):Student(Name){
+        age = Age;
+    }
+    ~Student()
+    {
+        if (name != nullptr)
+        {
+            delete[] name;
         }
+        cout << "Destruct\n";
+        Sleep(1000);
+
+    }
+  
+    void Init()
+    {
+        char buff[20];
+        cout << "Enter name -> ";
+        cin >> buff; // Oleg
+
+        name = new char[strlen(buff) + 1];
+        strcpy_s(name, strlen(buff) + 1, buff);
+        cout << "Enter age-> ";
+        cin >> age;
+    }
+    void Output()
+    {
+        cout << "Name: " << name << endl
+            << "Age: " << age << endl << endl;
     }
 
-    // Инициализация
-    void init(int x, int y) {
-        if (y == 0) {
-            cout << "Error: Denominator cannot be zero" << endl;
-            numerator = 0;
-            denominator = 1;
-        } else {
-            numerator = x;
-            denominator = y;
-        }
-    }
-
-    // Вывод дроби
-    void printFraction() {
-        cout << numerator << " / " << denominator << endl;
-    }
-
-    // Арифметические операции
-    Fractions Sum(Fractions& b) {
-        Fractions rez(numerator + b.numerator, denominator + b.denominator);
-        return rez;
-    }
-
-    Fractions Minus(Fractions& b) {
-        Fractions rez(numerator - b.numerator, denominator - b.denominator);
-        return rez;
-    }
-
-    Fractions Multiplication(Fractions& b) {
-        Fractions rez(numerator * b.numerator, denominator * b.denominator);
-        return rez;
-    }
-
-    Fractions Divide(Fractions& b) {
-        Fractions rez(numerator / b.numerator, denominator / b.denominator);
-        return rez;
-    }
-
-    // Сеттеры и геттеры
-    void setNumerator(int a) {
-        numerator = a;
-    }
-
-    void setDenominator(int b) {
-        if (b == 0) {
-            cout << "Error: Denominator cannot be zero" << endl;
-            denominator = 1;
-        } else {
-            denominator = b;
-        }
-    }
-
-    int getNumerator() {
-        return numerator;
-    }
-
-    int getDenominator() {
-        return denominator;
-    }
 };
 
-int main() {
-    Fractions frac1(2, 4);
-    Fractions frac2(3, 5);
+int main()
+{
+    int count;
+    cout << "Enter count -> ";
+    cin >> count; // 3
 
-    Fractions result = frac1.Sum(frac2);
-    result.printFraction();
+    Student* mas = new Student[count];
 
-    return 0;
+    for (int i = 0; i < count; i++)
+    {
+        mas[i].Init();
+    }
+    for (int i = 0; i < count; i++)
+    {
+        mas[i].Output();
+    }
+
+    delete[] mas;
 }
