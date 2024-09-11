@@ -87,10 +87,33 @@ void MyString::MyStrCat(MyString& b) {
 }
 
 void MyString::MyDelChr(char c) {
+	if (str == nullptr) return;
 
+	int j = 0;
+
+	for (int i = 0; str[i] != '\0'; i++) {
+		if (str[i] != c) {
+			str[j++] = str[i]; 
+		}
+	}
+
+	str[j] = '\0';
+	length = j;
 }
 
 int MyString::MyStrCmp(MyString& b) {
+	if (str == nullptr && b.str == nullptr) return 0; 
+	if (str == nullptr) return -1; 
+	if (b.str == nullptr) return 1; 
 
-	return 0;
+	int i = 0;
+	while (str[i] != '\0' && b.str[i] != '\0') {
+		if (str[i] < b.str[i]) return -1; 
+		if (str[i] > b.str[i]) return 1; 
+		i++;
+	}
+
+	if (str[i] == '\0' && b.str[i] == '\0') return 0; 
+	if (str[i] == '\0') return -1; 
+	return 1; 
 }
