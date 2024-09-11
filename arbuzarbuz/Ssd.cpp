@@ -1,5 +1,5 @@
 #include "Ssd.h"
-#include <cstring>
+#include <iostream>
 
 Ssd::Ssd(const char* m, double pr) {
     model = new char[strlen(m) + 1];
