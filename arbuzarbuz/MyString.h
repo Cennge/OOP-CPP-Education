@@ -8,7 +8,7 @@ public:
 	~MyString();
 	
 	void MyStrcpy(MyString& obj);
-	bool MyStrStr(const char* str);
+	bool MyStrStr(const char* substr);
 	int MyChr(char c);
 	int MyStrLen();
 	void MyStrCat(MyString& b);
