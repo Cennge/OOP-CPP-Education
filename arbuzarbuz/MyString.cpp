@@ -27,7 +27,7 @@ MyString::MyString(const char* initStr) {
 		str[0] = '\0'; 
 	}
 	else {
-		length = std::strlen(initStr);
+		length = strlen(initStr);
 		str = new char[length + 1]; 
 		strcpy_s(str, length + 1, initStr); 
 	}
@@ -154,4 +154,17 @@ void MyString::Print() {
 	else {
 		cout << str << endl;
 	}
+}
+
+void MyString::Input() {
+	char buffer[1024]; 
+	cout << "Enter a string: ";
+
+	cin.getline(buffer, 1024); 
+
+	delete[] str; 
+
+	length = strlen(buffer); 
+	str = new char[length + 1]; 
+	strcpy_s(str, length + 1, buffer); 
 }

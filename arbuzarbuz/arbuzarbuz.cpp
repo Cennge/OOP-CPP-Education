@@ -8,5 +8,7 @@ int main() {
     cout<<"Len = " << stringExample.MyStrLen() << endl;
     stringExample.Print();
 
+    stringExample.Input();
+    stringExample.Print();
     return 0;
 }

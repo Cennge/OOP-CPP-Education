@@ -18,5 +18,6 @@ public:
 	int MyStrCmp(MyString& b);
 	
 	void Print();
+	void Input();
 };
 
