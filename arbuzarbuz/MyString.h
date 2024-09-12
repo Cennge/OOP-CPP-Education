@@ -5,6 +5,8 @@ class MyString
 	int length; 
 public:
 	MyString();
+	MyString(int size);
+	MyString(const char* initStr);
 	~MyString();
 	
 	void MyStrcpy(MyString& obj);
@@ -14,5 +16,7 @@ public:
 	void MyStrCat(MyString& b);
 	void MyDelChr(char c);
 	int MyStrCmp(MyString& b);
+	
+	void Print();
 };
 

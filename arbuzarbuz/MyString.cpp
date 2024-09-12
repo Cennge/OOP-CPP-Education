@@ -1,12 +1,41 @@
 #include "MyString.h"
+#include <iostream>
+
+using namespace std;
 
 MyString::MyString() {
-	str = nullptr;
-	length = 0;
+	length = 80; 
+	str = new char[length + 1]; 
+	for (size_t i = 0; i <= length; ++i) {
+		str[i] = '\0'; 
+	}
 }
 
-MyString::~MyString() {
+MyString::MyString(int size) {
+	if (size < 0) size = 0; 
+	length = static_cast<size_t>(size);
+	str = new char[length + 1]; 
+	for (size_t i = 0; i <= length; ++i) {
+		str[i] = '\0'; 
+	}
+}
 
+MyString::MyString(const char* initStr) {
+	if (initStr == nullptr) {
+		length = 0;
+		str = new char[1];
+		str[0] = '\0'; 
+	}
+	else {
+		length = std::strlen(initStr);
+		str = new char[length + 1]; 
+		strcpy_s(str, length + 1, initStr); 
+	}
+}
+
+
+MyString::~MyString() {
+	delete[] str;
 }
 
 
@@ -37,15 +66,15 @@ bool MyString::MyStrStr(const char* substr) {
 		if (substr[j] == '\0') return true;
 	}
 
-	return false; 
+	return false;
 }
 
 int MyString::MyChr(char c) {
-	if (str == nullptr) return -1; 
+	if (str == nullptr) return -1;
 
 	for (int i = 0; str[i] != '\0'; i++) {
-		if (str[i] == c) { 
-			return i; 
+		if (str[i] == c) {
+			return i;
 		}
 	}
 
@@ -53,19 +82,19 @@ int MyString::MyChr(char c) {
 }
 
 int MyString::MyStrLen() {
-	if (str == nullptr) return 0; 
+	if (str == nullptr) return 0;
 
-	int length = 0; 
+	int length = 0;
 
 	while (str[length] != '\0') {
-		length++; 
+		length++;
 	}
 
 	return length;
 }
 
 void MyString::MyStrCat(MyString& b) {
-	if (str == nullptr) return; 
+	if (str == nullptr) return;
 	if (b.str == nullptr) return;
 
 	int newLength = MyStrLen() + b.MyStrLen();
@@ -93,7 +122,7 @@ void MyString::MyDelChr(char c) {
 
 	for (int i = 0; str[i] != '\0'; i++) {
 		if (str[i] != c) {
-			str[j++] = str[i]; 
+			str[j++] = str[i];
 		}
 	}
 
@@ -102,18 +131,27 @@ void MyString::MyDelChr(char c) {
 }
 
 int MyString::MyStrCmp(MyString& b) {
-	if (str == nullptr && b.str == nullptr) return 0; 
-	if (str == nullptr) return -1; 
-	if (b.str == nullptr) return 1; 
+	if (str == nullptr && b.str == nullptr) return 0;
+	if (str == nullptr) return -1;
+	if (b.str == nullptr) return 1;
 
 	int i = 0;
 	while (str[i] != '\0' && b.str[i] != '\0') {
-		if (str[i] < b.str[i]) return -1; 
-		if (str[i] > b.str[i]) return 1; 
+		if (str[i] < b.str[i]) return -1;
+		if (str[i] > b.str[i]) return 1;
 		i++;
 	}
 
-	if (str[i] == '\0' && b.str[i] == '\0') return 0; 
-	if (str[i] == '\0') return -1; 
-	return 1; 
+	if (str[i] == '\0' && b.str[i] == '\0') return 0;
+	if (str[i] == '\0') return -1;
+	return 1;
+}
+
+void MyString::Print() {
+	if (str == nullptr) {
+		cout << "(null)" << endl;
+	}
+	else {
+		cout << str << endl;
+	}
 }
