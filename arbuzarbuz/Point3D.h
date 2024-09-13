@@ -1,10 +1,14 @@
 #pragma once
 class Point3D {
-public:
     int x, y, z;
+    static int count;
+public:
+   
 
     Point3D();
     Point3D(int x, int y, int z);
+    ~Point3D();
+
     void Init(int x, int y, int z);
     void Show();
 
@@ -15,5 +19,8 @@ public:
     Point3D& Min(int x, int y, int z);
     Point3D& Mult(int x, int y, int z);
     Point3D& Div(int x, int y, int z);
+
+    static void GetCount();
 };
+
 
