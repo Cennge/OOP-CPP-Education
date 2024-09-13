@@ -10,5 +10,10 @@ int main() {
 
     stringExample.Input();
     stringExample.Print();
+
+    MyString stringExample2("YiYi!!!");
+
+    MyString::GetCountLiveObj();
+    MyString::GetCountCreatedObj();
     return 0;
 }

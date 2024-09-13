@@ -3,6 +3,8 @@ class MyString
 {
 	char* str; 
 	int length; 
+	static int countLiveObj;
+	static int countCreatedObj;
 public:
 	MyString();
 	MyString(int size);
@@ -19,5 +21,8 @@ public:
 	
 	void Print();
 	void Input();
+
+	static void GetCountLiveObj();
+	static void GetCountCreatedObj();
 };
 

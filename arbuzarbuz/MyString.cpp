@@ -3,12 +3,18 @@
 
 using namespace std;
 
+int MyString::countLiveObj = 0;
+int MyString::countCreatedObj = 0;
+
 MyString::MyString() {
-	length = 80; 
+	length = 80;
 	str = new char[length + 1]; 
 	for (size_t i = 0; i <= length; ++i) {
 		str[i] = '\0'; 
 	}
+
+	countCreatedObj++;
+	countLiveObj++;
 }
 
 MyString::MyString(int size) {
@@ -18,6 +24,9 @@ MyString::MyString(int size) {
 	for (size_t i = 0; i <= length; ++i) {
 		str[i] = '\0'; 
 	}
+
+	countCreatedObj++;
+	countLiveObj++;
 }
 
 MyString::MyString(const char* initStr) {
@@ -31,11 +40,15 @@ MyString::MyString(const char* initStr) {
 		str = new char[length + 1]; 
 		strcpy_s(str, length + 1, initStr); 
 	}
+
+	countCreatedObj++;
+	countLiveObj++;
 }
 
 
 MyString::~MyString() {
 	delete[] str;
+	countLiveObj--;
 }
 
 
@@ -167,4 +180,12 @@ void MyString::Input() {
 	length = strlen(buffer); 
 	str = new char[length + 1]; 
 	strcpy_s(str, length + 1, buffer); 
+}
+
+void MyString::GetCountLiveObj(){
+	cout << "Number of live objects: " << countLiveObj << endl;
+}
+
+void MyString::GetCountCreatedObj(){
+	cout << "Total number of objects created: " << countCreatedObj << endl;
 }
