@@ -126,6 +126,19 @@ int Vector::PopIndex(int index) {
 	return el;
 }
 
-void Vector::PushArr(int arr[]) {
+void Vector::PushArr(int newArr[], int newSize) {
+	int* temp = new int[size + newSize];
+	
+	for (int i = 0; i < size; i++) {
+		temp[i] = arr[i];
+	}
 
+	for (int i = 0; i < newSize; i++) {
+		temp[size + i] = newArr[i];
+	}
+
+	delete[] arr;
+
+	arr = temp;
+	size += newSize;
 }
