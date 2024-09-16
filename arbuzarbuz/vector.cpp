@@ -59,22 +59,40 @@ int Vector::PopBack() {
 	return el;
 }
 
-void Vector::PushForward(int a){
-
-}
-
-int Vector::PopForward(){
-
-	return 0;
-}
-
-void Vector::PushIndex(int a, int index){
+void Vector::PushForward(int a) {
 	int* temp = new int[size + 1];
-	
+	temp[0] = a;
+
+	for (int i = 0; i < size; i++) {
+		temp[i + 1] = arr[i];
+	}
+
+	delete[] arr;
+	arr = temp;
+	size++;
+}
+
+int Vector::PopForward() {
+	int* temp = new int[size - 1];
+	for (int i = 0; i < size - 1; i++) {
+		temp[i] = arr[i];
+	}
+	int el = arr[0];
+
+	delete[] arr;
+	arr = temp;
+	size--;
+
+	return el;
+}
+
+void Vector::PushIndex(int a, int index) {
+	int* temp = new int[size + 1];
+
 	for (int i = 0; i < index; i++) {
 		temp[i] = arr[i];
 	}
-	
+
 	temp[index] = a;
 
 	for (int i = index; i < size; i++) {
@@ -87,7 +105,7 @@ void Vector::PushIndex(int a, int index){
 	size++;
 }
 
-int Vector::PopIndex(int index){
+int Vector::PopIndex(int index) {
 	int* temp = new int[size - 1];
 
 	for (int i = 0; i < index; i++) {
@@ -108,6 +126,6 @@ int Vector::PopIndex(int index){
 	return el;
 }
 
-void Vector::PushArr(int arr[]){
+void Vector::PushArr(int arr[]) {
 
 }
