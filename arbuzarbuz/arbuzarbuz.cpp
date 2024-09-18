@@ -1,96 +1,52 @@
-#include <iostream>
-
+#include<iostream>
+#include<Windows.h>
 using namespace std;
 
-class Fractions {
-private:
-    double numerator, denominator;
-
+class Student
+{
+	char* name;
+	int age;
 public:
-    // Конструкторы
-    Fractions() {
-        numerator = 1;
-        denominator = 1;
-    }
+	Student();
+	Student(const char*, int);
+	Student(const Student& obj);
+	void Output();
+	~Student();
 
-    Fractions(int a, int b) {
-        if (b == 0) {
-            cout << "Error: Denominator cannot be zero" << endl;
-            numerator = 0;
-            denominator = 1;
-        } else {
-            numerator = a;
-            denominator = b;
-        }
-    }
-
-    // Инициализация
-    void init(int x, int y) {
-        if (y == 0) {
-            cout << "Error: Denominator cannot be zero" << endl;
-            numerator = 0;
-            denominator = 1;
-        } else {
-            numerator = x;
-            denominator = y;
-        }
-    }
-
-    // Вывод дроби
-    void printFraction() {
-        cout << numerator << " / " << denominator << endl;
-    }
-
-    // Арифметические операции
-    Fractions Sum(Fractions& b) {
-        Fractions rez(numerator + b.numerator, denominator + b.denominator);
-        return rez;
-    }
-
-    Fractions Minus(Fractions& b) {
-        Fractions rez(numerator - b.numerator, denominator - b.denominator);
-        return rez;
-    }
-
-    Fractions Multiplication(Fractions& b) {
-        Fractions rez(numerator * b.numerator, denominator * b.denominator);
-        return rez;
-    }
-
-    Fractions Divide(Fractions& b) {
-        Fractions rez(numerator / b.numerator, denominator / b.denominator);
-        return rez;
-    }
-
-    // Сеттеры и геттеры
-    void setNumerator(int a) {
-        numerator = a;
-    }
-
-    void setDenominator(int b) {
-        if (b == 0) {
-            cout << "Error: Denominator cannot be zero" << endl;
-            denominator = 1;
-        } else {
-            denominator = b;
-        }
-    }
-
-    int getNumerator() {
-        return numerator;
-    }
-
-    int getDenominator() {
-        return denominator;
-    }
 };
+Student::Student()
+{
+	name = nullptr;
+	age = 0;
+}
+Student::Student(const char* Name, int Age)
+{
+	name = new char[strlen(Name) + 1];
+	strcpy_s(name, strlen(Name) + 1, Name);
+	age = Age;
+}
+void Student::Output()
+{
+	cout << "Name: " << name << endl
+		<< "Age: " << age << endl << endl;
+}
+Student::~Student()
+{
 
-int main() {
-    Fractions frac1(2, 4);
-    Fractions frac2(3, 5);
+	delete[] name;
 
-    Fractions result = frac1.Sum(frac2);
-    result.printFraction();
+	cout << "Destruct\n";
+	Sleep(1000);
 
-    return 0;
+}
+Student::Student(const Student& obj) {
+	name = new char[strlen(obj.name) + 1];
+	strcpy_s(name, strlen(obj.name) + 1, obj.name);
+	age = obj.age;
+}
+
+int main()
+{
+	
+	system("pause");
 }
