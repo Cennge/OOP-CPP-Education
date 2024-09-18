@@ -19,9 +19,9 @@ MyString::MyString() {
 
 MyString::MyString(int size) {
 	if (size < 0) size = 0; 
-	length = static_cast<size_t>(size);
+	length = size;
 	str = new char[length + 1]; 
-	for (size_t i = 0; i <= length; ++i) {
+	for (int i = 0U; i <= length; ++i) { //0U unsigned
 		str[i] = '\0'; 
 	}
 
@@ -45,6 +45,14 @@ MyString::MyString(const char* initStr) {
 	countLiveObj++;
 }
 
+MyString::MyString(const MyString& other) {
+	length = other.length;
+	str = new char[length + 1];
+	strcpy_s(str, length + 1, other.str); 
+
+	countCreatedObj++;
+	countLiveObj++;
+}
 
 MyString::~MyString() {
 	delete[] str;

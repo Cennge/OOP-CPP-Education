@@ -9,6 +9,7 @@ public:
 	MyString();
 	MyString(int size);
 	MyString(const char* initStr);
+	MyString(const MyString& other);
 	~MyString();
 	
 	void MyStrcpy(MyString& obj);
