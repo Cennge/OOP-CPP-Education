@@ -47,6 +47,12 @@ Student::Student(const Student& obj) {
 
 int main()
 {
-	
+	Student obj1("Someone", 18);
+	obj1.Output();
+
+	Student obj2(obj1);
+	obj2.Output();
+
+
 	system("pause");
 }
