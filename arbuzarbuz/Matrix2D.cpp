@@ -63,6 +63,11 @@ Matrix2D Matrix2D::SumMatrix(const Matrix2D arr2)
 	return result;
 }
 
+Matrix2D Matrix2D::MultiMatrix(const Matrix2D arr2)
+{
+	
+}
+
 void Matrix2D::Input()
 {
 	for (int i = 0; i < str; i++) {

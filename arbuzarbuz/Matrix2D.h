@@ -11,6 +11,7 @@ public:
 	~Matrix2D();
 
 	Matrix2D SumMatrix(const Matrix2D arr2);
+	Matrix2D MultiMatrix(const Matrix2D arr2);
 
 	void Input();
 	void Print()const;
