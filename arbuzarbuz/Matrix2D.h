@@ -7,7 +7,11 @@ class Matrix2D
 public:
 	Matrix2D();
 	Matrix2D(int _str, int _st);
+	Matrix2D(const Matrix2D& arr);
 	~Matrix2D();
+
+	Matrix2D SumMatrix(const Matrix2D arr2);
+
 	void Input();
 	void Print()const;
 };
