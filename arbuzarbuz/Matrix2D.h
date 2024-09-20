@@ -12,6 +12,10 @@ public:
 
 	Matrix2D SumMatrix(const Matrix2D arr2);
 	Matrix2D MultiMatrix(const Matrix2D arr2);
+	Matrix2D TransposeMatrix();
+
+	void SetElement(int row, int col, int value);
+	int GetElement(int row, int col);
 
 	void Input();
 	void Print()const;
