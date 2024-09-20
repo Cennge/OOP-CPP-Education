@@ -10,10 +10,12 @@ int main() {
 	Vector obj2 = obj1 - 2;
 	obj2.Print();
 
-	Vector obj3 = obj1 + 5; // 1 2 3 4 5 0 0 0 0 
+	Vector obj3 = obj1 + 5;
 	obj3.Print();
 
-	//Vector obj4(2);// 10 20
+	Vector obj4(2);
+	obj1.InputRand();
+	obj4.Print();
 
 	//Vector obj5 = obj1 + obj4; // 1 2 3 4 5 10 20
 

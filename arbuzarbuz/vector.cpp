@@ -163,3 +163,5 @@ Vector Vector::operator + (int a) {
 
 	return rez;
 }
+
+
