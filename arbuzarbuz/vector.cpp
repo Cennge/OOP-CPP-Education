@@ -128,7 +128,7 @@ int Vector::PopIndex(int index) {
 
 void Vector::PushArr(int newArr[], int newSize) {
 	int* temp = new int[size + newSize];
-	
+
 	for (int i = 0; i < size; i++) {
 		temp[i] = arr[i];
 	}
@@ -141,4 +141,25 @@ void Vector::PushArr(int newArr[], int newSize) {
 
 	arr = temp;
 	size += newSize;
+}
+
+Vector Vector::operator - (int a) {
+	Vector rez(size - a);
+	for (int i = 0; i < rez.size; i++) {
+		rez.arr[i] = this->arr[i];
+	}
+	return rez;
+}
+
+Vector Vector::operator + (int a) {
+	Vector rez(size + a);
+
+	for (int i = 0; i < size; i++) {
+		rez.arr[i] = this->arr[i];
+	}
+	for (int i = size; i < rez.size; i++) {
+		rez.arr[i] = 0;
+	}
+
+	return rez;
 }
