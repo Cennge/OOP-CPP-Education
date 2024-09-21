@@ -22,7 +22,10 @@ public:
     int PopIndex(int index); 
 
     void PushArr(int newArr[], int newSize);
-
+    
     Vector operator-(int a);
     Vector operator+(int a); 
+    Vector operator*(int a); 
+    
+    Vector operator+(const Vector& obj);
 };

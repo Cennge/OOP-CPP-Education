@@ -164,4 +164,31 @@ Vector Vector::operator + (int a) {
 	return rez;
 }
 
+Vector Vector::operator*(int a)
+{
+	Vector rez(size);
+
+	for (int i = 0; i < size; i++) {
+		rez.arr[i] = this->arr[i] * a;
+	}
+	return rez;
+}
+
+Vector Vector::operator+(const Vector& obj)
+{
+	int newSize = this->size + obj.size;
+
+	Vector rez(newSize);
+
+	for (int i = 0; i < this->size; i++) {
+		rez.arr[i] = this->arr[i];
+	}
+
+	for (int i = 0; i < obj.size; i++) {
+		rez.arr[this->size + i] = obj.arr[i];
+	}
+
+	return rez;
+}
+
 

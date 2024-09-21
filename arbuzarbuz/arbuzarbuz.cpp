@@ -14,13 +14,14 @@ int main() {
 	obj3.Print();
 
 	Vector obj4(2);
-	obj1.InputRand();
+	obj4.InputRand();
 	obj4.Print();
 
-	//Vector obj5 = obj1 + obj4; // 1 2 3 4 5 10 20
+	Vector obj5 = obj1 + obj4;
+	obj5.Print();
 
-	//Vector obj6 = obj1 * 3; // 3 6 9 12 15 
+	Vector obj6 = obj1 * 3; 
+	obj6.Print();
 
 	return 0;
-
 }
