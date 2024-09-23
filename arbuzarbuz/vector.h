@@ -28,4 +28,13 @@ public:
     Vector operator*(int a); 
     
     Vector operator+(const Vector& obj);
+
+    Vector& operator++();
+    Vector operator++(int);
+    Vector& operator--();
+    Vector operator--(int);
+
+    Vector& operator+=(int a);
+    Vector& operator-=(int a);
+    Vector& operator*=(int a);
 };

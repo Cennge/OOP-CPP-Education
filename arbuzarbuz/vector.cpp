@@ -191,4 +191,70 @@ Vector Vector::operator+(const Vector& obj)
 	return rez;
 }
 
+Vector& Vector::operator++() {
+	PushForward(0);
+	return *this;
+}
+Vector Vector::operator++(int) {
+	Vector temp = *this;
+	PushForward(0);
+	return temp;  
+}
+
+Vector& Vector::operator--(){
+	PopIndex(0);
+	return *this;
+}
+
+Vector Vector::operator--(int){
+	Vector temp = *this;  
+	PopIndex(0);  
+	return temp;
+}
+
+Vector& Vector::operator+=(int a) {
+	int* temp = new int[size + a];
+
+	for (int i = 0; i < size; i++) {
+		temp[i] = arr[i];
+	}
+
+	for (int i = size; i < size + a; i++) {
+		temp[i] = 0;
+	}
+
+	delete[] arr;
+
+	arr = temp;
+	size += a;  
+
+	return *this; 
+}
+
+Vector& Vector::operator-=(int a){
+	if (size >= a) {
+		int* temp = new int[size - a];
+		for (int i = 0; i < size - a; i++) {
+			temp[i] = arr[i];
+		}
+
+		delete[] arr;
+
+		arr = temp;
+		size -= a;
+	}
+
+	return *this; 
+
+}
+
+Vector& Vector::operator*=(int a) {
+	for (int i = 0; i < size; i++) {
+		arr[i] *= a;
+	}
+
+	return *this;  
+}
+
+
 
