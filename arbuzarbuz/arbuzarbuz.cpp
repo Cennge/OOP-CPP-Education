@@ -1,96 +1,102 @@
-#include <iostream>
-
+#include<iostream>
 using namespace std;
 
-class Fractions {
+class Point // создание нового типа!!
+{
 private:
-    double numerator, denominator;
-
+	int x;
+	int y;
 public:
-    // Конструкторы
-    Fractions() {
-        numerator = 1;
-        denominator = 1;
-    }
+	Point() {}
+	Point(int a, int b)
+	{
+		x = a;
+		y = b;
+	}
+	void Print() // метод класса
+	{
+		cout << "X: " << x << "\tY: " << y << endl;
+	}
+	void Input(int a, int b) // метод класса
+	{
+		x = a;
+		y = b;
+	}
 
-    Fractions(int a, int b) {
-        if (b == 0) {
-            cout << "Error: Denominator cannot be zero" << endl;
-            numerator = 0;
-            denominator = 1;
-        } else {
-            numerator = a;
-            denominator = b;
-        }
-    }
+	Point Sum(Point& b)
+	{
+		Point sum(x + b.x, y + b.y);
+		return sum;
+	}
 
-    // Инициализация
-    void init(int x, int y) {
-        if (y == 0) {
-            cout << "Error: Denominator cannot be zero" << endl;
-            numerator = 0;
-            denominator = 1;
-        } else {
-            numerator = x;
-            denominator = y;
-        }
-    }
+	Point operator+ (Point& b) // obj+obj
+	{
+		Point sum(x + b.x, y + b.y);
+		return sum;
+	}
+	Point operator+ (int b) // obj+int
+	{
+		Point sum(x + b, y + b);
+		return sum;
+	}
 
-    // Вывод дроби
-    void printFraction() {
-        cout << numerator << " / " << denominator << endl;
-    }
+	Point& operator++() // ++a
+	{
+		x += 10;
+		y += 10;
+		return *this;
+	}
+	Point operator++(int) // a++
+	{
+		Point temp(x, y);
+		x += 10;
+		y += 10;
+		return temp;
+	}
+	Point& operator--() // --a
+	{
+		x -= 10;
+		y -= 10;
+		return *this;
+	}
+	Point operator--(int) // a--
+	{
+		Point temp(x, y);
+		x -= 10;
+		y -= 10;
+		return temp;
+	}
 
-    // Арифметические операции
-    Fractions Sum(Fractions& b) {
-        Fractions rez(numerator + b.numerator, denominator + b.denominator);
-        return rez;
-    }
+	///---- сокращенные формы
 
-    Fractions Minus(Fractions& b) {
-        Fractions rez(numerator - b.numerator, denominator - b.denominator);
-        return rez;
-    }
-
-    Fractions Multiplication(Fractions& b) {
-        Fractions rez(numerator * b.numerator, denominator * b.denominator);
-        return rez;
-    }
-
-    Fractions Divide(Fractions& b) {
-        Fractions rez(numerator / b.numerator, denominator / b.denominator);
-        return rez;
-    }
-
-    // Сеттеры и геттеры
-    void setNumerator(int a) {
-        numerator = a;
-    }
-
-    void setDenominator(int b) {
-        if (b == 0) {
-            cout << "Error: Denominator cannot be zero" << endl;
-            denominator = 1;
-        } else {
-            denominator = b;
-        }
-    }
-
-    int getNumerator() {
-        return numerator;
-    }
-
-    int getDenominator() {
-        return denominator;
-    }
+	Point& operator += (int a) {
+		x += a;
+		y += a;
+		return *this;
+	}
+	Point& operator-=(int a) {
+		x -= a;     y -= a;
+		return *this;
+	}
+	Point& operator*=(int a) {
+		x *= a;
+		y *= a;     return *this;
+	}
+	Point& operator/=(int a) {
+		x /= a;     y /= a;
+		return *this;
+	}
 };
+int main()
+{
+	Point a(1, 2);
+	a.Print();
+	// Point x = ++a;
+	a += 20;
+	a.Print();
 
-int main() {
-    Fractions frac1(2, 4);
-    Fractions frac2(3, 5);
 
-    Fractions result = frac1.Sum(frac2);
-    result.printFraction();
 
-    return 0;
+
+
 }
