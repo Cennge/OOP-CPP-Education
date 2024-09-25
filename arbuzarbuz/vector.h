@@ -37,4 +37,6 @@ public:
     Vector& operator+=(int a);
     Vector& operator-=(int a);
     Vector& operator*=(int a);
+
+    Vector& operator=(const Vector& obj);
 };

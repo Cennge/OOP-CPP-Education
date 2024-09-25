@@ -256,5 +256,17 @@ Vector& Vector::operator*=(int a) {
 	return *this;  
 }
 
+Vector& Vector::operator=(const Vector& obj) {
+	if (this == &obj) return *this;
+	if (arr != nullptr) delete[] arr;
+
+	size = obj.size;
+	arr = new int[size];
+	for (int i = 0; i < size; i++) {
+		arr[i] = obj.arr[i];
+	}
+	return *this;
+}
+
 
 
