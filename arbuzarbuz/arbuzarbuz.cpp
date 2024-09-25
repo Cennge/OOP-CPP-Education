@@ -44,6 +44,17 @@ Student::Student(const Student& obj) {
 	strcpy_s(name, strlen(obj.name) + 1, obj.name);
 	age = obj.age;
 }
+Student& Student::operator=(const Student& obj) {
+	if (this == &obj) return *this;
+
+	if (name != nullptr) delete[] name;
+
+	name = new char[strlen(obj.name) + 1];
+	strcpy_s(name, strlen(obj.name) + 1, obj.name);
+	age = obj.age;
+
+	return *this;
+}
 
 int main()
 {
