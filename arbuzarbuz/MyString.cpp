@@ -8,9 +8,9 @@ int MyString::countCreatedObj = 0;
 
 MyString::MyString() {
 	length = 80;
-	str = new char[length + 1]; 
+	str = new char[length + 1];
 	for (size_t i = 0; i <= length; ++i) {
-		str[i] = '\0'; 
+		str[i] = '\0';
 	}
 
 	countCreatedObj++;
@@ -18,11 +18,11 @@ MyString::MyString() {
 }
 
 MyString::MyString(int size) {
-	if (size < 0) size = 0; 
+	if (size < 0) size = 0;
 	length = size;
-	str = new char[length + 1]; 
+	str = new char[length + 1];
 	for (int i = 0U; i <= length; ++i) { //0U unsigned
-		str[i] = '\0'; 
+		str[i] = '\0';
 	}
 
 	countCreatedObj++;
@@ -33,12 +33,12 @@ MyString::MyString(const char* initStr) {
 	if (initStr == nullptr) {
 		length = 0;
 		str = new char[1];
-		str[0] = '\0'; 
+		str[0] = '\0';
 	}
 	else {
 		length = strlen(initStr);
-		str = new char[length + 1]; 
-		strcpy_s(str, length + 1, initStr); 
+		str = new char[length + 1];
+		strcpy_s(str, length + 1, initStr);
 	}
 
 	countCreatedObj++;
@@ -48,7 +48,7 @@ MyString::MyString(const char* initStr) {
 MyString::MyString(const MyString& other) {
 	length = other.length;
 	str = new char[length + 1];
-	strcpy_s(str, length + 1, other.str); 
+	strcpy_s(str, length + 1, other.str);
 
 	countCreatedObj++;
 	countLiveObj++;
@@ -178,22 +178,41 @@ void MyString::Print() {
 }
 
 void MyString::Input() {
-	char buffer[1024]; 
+	char buffer[1024];
 	cout << "Enter a string: ";
 
-	cin.getline(buffer, 1024); 
+	cin.getline(buffer, 1024);
 
-	delete[] str; 
+	delete[] str;
 
-	length = strlen(buffer); 
-	str = new char[length + 1]; 
-	strcpy_s(str, length + 1, buffer); 
+	length = strlen(buffer);
+	str = new char[length + 1];
+	strcpy_s(str, length + 1, buffer);
 }
 
-void MyString::GetCountLiveObj(){
+void MyString::GetCountLiveObj() {
 	cout << "Number of live objects: " << countLiveObj << endl;
 }
 
-void MyString::GetCountCreatedObj(){
+void MyString::GetCountCreatedObj() {
 	cout << "Total number of objects created: " << countCreatedObj << endl;
+}
+
+MyString MyString::operator=(const MyString& obj){
+	if (this == &obj) return *this;
+	delete[] str;
+
+	length = obj.length;
+	str = new char[length + 1];
+	strcpy_s(str, length + 1, obj.str);
+
+	return *this;
+}
+
+MyString MyString::operator[](int index){
+	return str[index];
+}
+
+void MyString::operator()(){
+	Print();
 }

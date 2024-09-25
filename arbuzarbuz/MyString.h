@@ -25,5 +25,9 @@ public:
 
 	static void GetCountLiveObj();
 	static void GetCountCreatedObj();
+
+	MyString operator=(const MyString& obj);
+	MyString operator[](int index);
+	void operator()();
 };
 
