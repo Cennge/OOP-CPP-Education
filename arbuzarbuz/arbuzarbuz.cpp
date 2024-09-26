@@ -170,6 +170,23 @@ Point operator--(Point& obj, int) // a--
 	obj.SetY(obj.GetY() - 1);
 	return temp;
 }
+Point operator+=(Point& obj, int a) {
+	obj.SetX(obj.GetX() + a);
+	obj.SetY(obj.GetY() + a);
+	return obj;
+}
+Point& operator-=(Point& obj, int a) {
+	obj.SetX(obj.GetX() - a);
+	obj.SetY(obj.GetY() - a);
+	return obj;
+}
+Point& operator*=(Point& obj, int a){
+	obj.SetX(obj.GetX() * a);
+	obj.SetY(obj.GetY() * a);
+	return obj;
+}
+
+
 
 
 
@@ -183,5 +200,8 @@ int main()
 	result = a * 10;          // умножение на число
 	result = --a;             // префиксный декремент
 	result = a--;             // постфиксный декремент
+	result += 10;
+	result -= 10;
+	result *= 10;
 
 }
