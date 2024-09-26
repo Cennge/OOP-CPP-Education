@@ -28,75 +28,160 @@ public:
 		Point sum(x + b.x, y + b.y);
 		return sum;
 	}
-
-	Point operator+ (Point& b) // obj+obj
+	int GetX()const
 	{
-		Point sum(x + b.x, y + b.y);
-		return sum;
+		return x;
 	}
-	Point operator+ (int b) // obj+int
+	int GetY()const
 	{
-		Point sum(x + b, y + b);
-		return sum;
+		return y;
 	}
-
-	Point& operator++() // ++a
+	void SetX(int _x)
 	{
-		x += 10;
-		y += 10;
-		return *this;
+		x = _x;
 	}
-	Point operator++(int) // a++
+	void SetY(int _y)
 	{
-		Point temp(x, y);
-		x += 10;
-		y += 10;
-		return temp;
-	}
-	Point& operator--() // --a
-	{
-		x -= 10;
-		y -= 10;
-		return *this;
-	}
-	Point operator--(int) // a--
-	{
-		Point temp(x, y);
-		x -= 10;
-		y -= 10;
-		return temp;
+		y = _y;
 	}
 
-	///---- сокращенные формы
+	//Point operator+ (Point& b) // obj+obj
+	//{
+	//	Point sum(x + b.x, y + b.y);
+	//	return sum;
+	//}
+	//Point operator+ (int b) // obj+int
+	//{
+	//	Point sum(x + b, y + b);
+	//	return sum;
+	//}
 
-	Point& operator += (int a) {
-		x += a;
-		y += a;
-		return *this;
-	}
-	Point& operator-=(int a) {
-		x -= a;     y -= a;
-		return *this;
-	}
-	Point& operator*=(int a) {
-		x *= a;
-		y *= a;     return *this;
-	}
-	Point& operator/=(int a) {
-		x /= a;     y /= a;
-		return *this;
-	}
+	//Point& operator++() // ++a
+	//{
+	//	x += 10;
+	//	y += 10;
+	//	return *this;
+	//}
+	//Point operator++(int) // a++
+	//{
+	//	Point temp(x, y);
+	//	x += 10;
+	//	y += 10;
+	//	return temp;
+	//}
+	//Point& operator--() // --a
+	//{
+	//	x -= 10;
+	//	y -= 10;
+	//	return *this;
+	//}
+	//Point operator--(int) // a--
+	//{
+	//	Point temp(x, y);
+	//	x -= 10;
+	//	y -= 10;
+	//	return temp;
+	//}
+
+	/////---- сокращенные формы
+	//Point& operator += (int a) {
+	//	x += a;
+	//	y += a;
+	//	return *this;
+	//}
+	//Point& operator-=(int a) {
+	//	x -= a;     y -= a;
+	//	return *this;
+	//}
+	//Point& operator*=(int a) {
+	//	x *= a;
+	//	y *= a;     return *this;
+	//}
+	//Point& operator/=(int a) {
+	//	x /= a;     y /= a;
+	//	return *this;
+	//}
 };
+
+Point operator+(int a, Point& b) // int+ Point
+{
+	Point rez;
+	rez.SetX(a + b.GetX());
+	rez.SetY(a + b.GetY());
+	return rez;
+}
+Point operator+(Point& b, int a) // Point + int 
+{
+	Point rez(b.GetX() + a, b.GetY() + a);
+	return rez;
+}
+Point operator++(Point& obj) // ++a
+{
+	obj.SetX(obj.GetX() + 10);
+	obj.SetY(obj.GetY() + 10);
+	return obj;
+}
+Point operator++(Point& obj, int) // a++
+{
+	Point temp(obj.GetX(), obj.GetY());
+
+	obj.SetX(obj.GetX() + 10);
+	obj.SetY(obj.GetY() + 10);
+
+	return temp;
+}
+Point operator-(const Point& a, const Point& b) // Point - Point
+{
+	Point rez;
+	rez.SetX(a.GetX() - b.GetX());
+	rez.SetY(a.GetY() - b.GetY());
+	return rez;
+}
+Point operator-(const Point& a, int b) // Point - int
+{
+	Point rez;
+	rez.SetX(a.GetX() - b);
+	rez.SetY(a.GetY() - b);
+	return rez;
+}
+Point operator*(const Point& a, int b) // Point * int
+{
+	Point rez;
+	rez.SetX(a.GetX() * b);
+	rez.SetY(a.GetY() * b);
+	return rez;
+}
+Point operator*(const Point& a, int b) // Point * int
+{
+	Point rez;
+	rez.SetX(a.GetX() * b);
+	rez.SetY(a.GetY() * b);
+	return rez;
+}
+Point operator--(Point& obj) {
+	obj.SetX(obj.GetX() - 1);
+	obj.SetY(obj.GetY() - 1);
+	return obj;
+}
+Point operator--(Point& obj, int) // a--
+{
+	Point temp = obj;
+	obj.SetX(obj.GetX() - 1);
+	obj.SetY(obj.GetY() - 1);
+	return temp;
+}
+
+
+
 int main()
 {
-	Point a(1, 2);
-	a.Print();
-	// Point x = ++a;
-	a += 20;
-	a.Print();
+	Point a(10, 20);
+	Point b(5, 15);
 
-
-
-
+	Point result = a - b;     // вычитание двух объектов
+	result = a - 10;          // вычитание числа
+	result = a * 10;          // умножение на число
+	result = --a;             // префиксный декремент
+	result = a--;             // постфиксный декремент
 
 }
