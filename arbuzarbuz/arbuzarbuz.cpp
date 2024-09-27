@@ -23,5 +23,7 @@ int main() {
 	Vector obj6 = obj1 * 3; 
 	obj6.Print();
 
+	Vector obj7 = 5 - obj1;
+
 	return 0;
 }

@@ -143,6 +143,20 @@ void Vector::PushArr(int newArr[], int newSize) {
 	size += newSize;
 }
 
+int* Vector::getArray() const {
+	return arr;
+}
+
+int Vector::getSize() const {
+	return size;
+}
+
+void Vector::setArray(int* newArr, int newSize) {
+	if (arr != nullptr)	delete[] arr;
+	arr = newArr;
+	size = newSize;
+}
+
 Vector Vector::operator - (int a) {
 	Vector rez(size - a);
 	for (int i = 0; i < rez.size; i++) {
@@ -198,17 +212,17 @@ Vector& Vector::operator++() {
 Vector Vector::operator++(int) {
 	Vector temp = *this;
 	PushForward(0);
-	return temp;  
+	return temp;
 }
 
-Vector& Vector::operator--(){
+Vector& Vector::operator--() {
 	PopIndex(0);
 	return *this;
 }
 
-Vector Vector::operator--(int){
-	Vector temp = *this;  
-	PopIndex(0);  
+Vector Vector::operator--(int) {
+	Vector temp = *this;
+	PopIndex(0);
 	return temp;
 }
 
@@ -226,12 +240,12 @@ Vector& Vector::operator+=(int a) {
 	delete[] arr;
 
 	arr = temp;
-	size += a;  
+	size += a;
 
-	return *this; 
+	return *this;
 }
 
-Vector& Vector::operator-=(int a){
+Vector& Vector::operator-=(int a) {
 	if (size >= a) {
 		int* temp = new int[size - a];
 		for (int i = 0; i < size - a; i++) {
@@ -244,7 +258,7 @@ Vector& Vector::operator-=(int a){
 		size -= a;
 	}
 
-	return *this; 
+	return *this;
 
 }
 
@@ -253,7 +267,7 @@ Vector& Vector::operator*=(int a) {
 		arr[i] *= a;
 	}
 
-	return *this;  
+	return *this;
 }
 
 Vector& Vector::operator=(const Vector& obj) {
@@ -269,4 +283,40 @@ Vector& Vector::operator=(const Vector& obj) {
 }
 
 
+ostream& operator<<(ostream& os, Vector obj) {
+	obj.Print();
+	return os;
+}
 
+istream& operator>>(istream& is, Vector& obj) {
+	cout << "Size: ";
+	is >> obj.size;
+
+	if (obj.arr != nullptr) delete[] obj.arr;
+
+	obj.arr = new int[obj.size];
+
+	cout << "Elements: ";
+	for (int i = 0; i < obj.size; i++) {
+		is >> obj.arr[i];
+	}
+
+	return is;
+}
+
+
+Vector operator-(int a, const Vector& obj) {
+	int newSize = obj.getSize() - a;
+	if (newSize <= 0) return Vector();
+
+	int* newArr = new int[newSize];
+
+	for (int i = 0; i < newSize; i++) {
+		newArr[i] = obj.getArray()[i + a];
+	}
+
+	Vector rez;
+	rez.setArray(newArr, newSize);
+
+	return rez;
+}

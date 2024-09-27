@@ -1,9 +1,13 @@
 #pragma once
+#include <iostream>
 
 class Vector {
 private:
     int* arr;
     int size;
+
+    friend ostream& operator<<(ostream& os, Vector obj);
+    friend istream& operator>>(istream& is, Vector& obj);
 public:
     Vector();                
     Vector(int s);        
@@ -22,6 +26,11 @@ public:
     int PopIndex(int index); 
 
     void PushArr(int newArr[], int newSize);
+
+    int* getArray() const;
+    int getSize() const;    
+
+    void setArray(int* newArr, int newSize);
     
     Vector operator-(int a);
     Vector operator+(int a); 
@@ -40,3 +49,6 @@ public:
 
     Vector& operator=(const Vector& obj);
 };
+
+
+Vector operator-(int a, const Vector& obj);
