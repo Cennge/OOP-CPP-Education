@@ -54,6 +54,24 @@ MyString::MyString(const MyString& other) {
 	countLiveObj++;
 }
 
+MyString::MyString(MyString&& obj) {
+	str = obj.str;
+	length = obj.length;
+	obj.str = nullptr;
+	obj.length = 0;
+}
+
+MyString& MyString::operator=(MyString&& obj) {
+	if (str != nullptr) delete[] str;
+
+	str = obj.str;
+	length = obj.length;
+	obj.str = nullptr;
+	obj.length = 0;
+	
+	return *this;
+}
+
 MyString::~MyString() {
 	delete[] str;
 	countLiveObj--;
@@ -198,7 +216,7 @@ void MyString::GetCountCreatedObj() {
 	cout << "Total number of objects created: " << countCreatedObj << endl;
 }
 
-MyString MyString::operator=(const MyString& obj){
+MyString MyString::operator=(const MyString& obj) {
 	if (this == &obj) return *this;
 	delete[] str;
 
@@ -209,10 +227,21 @@ MyString MyString::operator=(const MyString& obj){
 	return *this;
 }
 
-MyString MyString::operator[](int index){
+MyString MyString::operator[](int index) {
 	return str[index];
 }
 
-void MyString::operator()(){
+void MyString::operator()() {
 	Print();
+}
+
+ostream& operator<<(ostream& os, MyString obj) {
+	obj.Print();
+	return os;
+}
+
+istream& operator>>(istream& is, MyString& obj) {
+	obj.Input(); 
+	return is;
+
 }

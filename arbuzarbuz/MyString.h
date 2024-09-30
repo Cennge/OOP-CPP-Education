@@ -10,6 +10,8 @@ public:
 	MyString(int size);
 	MyString(const char* initStr);
 	MyString(const MyString& other);
+	MyString(MyString&& obj);
+	MyString& operator=(MyString&& obj);
 	~MyString();
 	
 	void MyStrcpy(MyString& obj);
@@ -30,4 +32,5 @@ public:
 	MyString operator[](int index);
 	void operator()();
 };
-
+ostream& operator<<(ostream& os, MyString obj);
+istream& operator>>(istream& is, MyString& obj);
