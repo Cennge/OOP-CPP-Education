@@ -21,6 +21,8 @@ public:
 	void MyStrCat(MyString& b);
 	void MyDelChr(char c);
 	int MyStrCmp(MyString& b);
+
+	MyString& operator+=(const char* appendStr);
 	
 	void Print();
 	void Input();
@@ -34,3 +36,4 @@ public:
 };
 ostream& operator<<(ostream& os, MyString obj);
 istream& operator>>(istream& is, MyString& obj);
+MyString operator+(const char* prefixStr, const MyString& myStr);

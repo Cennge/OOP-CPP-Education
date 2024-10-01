@@ -68,7 +68,7 @@ MyString& MyString::operator=(MyString&& obj) {
 	length = obj.length;
 	obj.str = nullptr;
 	obj.length = 0;
-	
+
 	return *this;
 }
 
@@ -186,6 +186,28 @@ int MyString::MyStrCmp(MyString& b) {
 	return 1;
 }
 
+MyString& MyString::operator+=(const char* appendStr) {
+	if (appendStr == nullptr) return *this;
+
+	MyString temp(appendStr);
+
+	MyStrCat(temp);
+
+	return *this;
+}
+
+MyString operator+(const char* prefixStr, const MyString& myStr) {
+	if (prefixStr == nullptr) return myStr;
+
+	MyString result(prefixStr);
+
+	MyString temp(myStr);
+	result.MyStrCat(temp);
+
+	return result;
+}
+
+
 void MyString::Print() {
 	if (str == nullptr) {
 		cout << "(null)" << endl;
@@ -241,7 +263,7 @@ ostream& operator<<(ostream& os, MyString obj) {
 }
 
 istream& operator>>(istream& is, MyString& obj) {
-	obj.Input(); 
+	obj.Input();
 	return is;
 
 }
