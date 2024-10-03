@@ -130,7 +130,6 @@
     <ClCompile Include="arbuzarbuz.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Matrix2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Matrix2D.h" />
