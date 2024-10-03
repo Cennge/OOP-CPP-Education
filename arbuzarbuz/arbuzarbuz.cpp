@@ -1,20 +1,35 @@
-#include <iostream>
+#include <iostream> 
+
+#include "Foo.h" 
+#include "Maximum.h" 
 
 using namespace std;
+typedef Maximum<int, int> My_int;
 
-template<class T>
-void Init(T mas[], int size)
+int main()
 {
-	for (int i = 0; i < size; ++i)
-	{
-		mas[i] = rand() % 100 * 1.1;
-		//cout << mas[i] << "\t";
-	}
-	cout << endl;
-}
+    //Foo<int> obj1(10); 
+    //obj1.Show(); 
 
-int main() {
-    
+    //Foo<char> obj2('A'); 
+    //obj2.Show(); 
+
+    //Foo<double> obj3(2.6); 
+    //obj3.Show(); 
+
+
+    My_int obj4(10, 20);// Maximum<int, int> obj4(10, 20); 
+    cout << obj4.MaxValue() << endl << endl;
+
+    Maximum<int, char> obj5(10, 'A');
+    cout << obj5.MaxValue() << endl << endl;
+
+    Maximum<char, int> obj6('A', 10);
+    cout << obj6.MaxValue() << endl << endl;
+
+    Maximum<double, int> obj7(5.7, 2);
+    cout << obj7.MaxValue() << endl << endl;
+
 
     return 0;
 }
