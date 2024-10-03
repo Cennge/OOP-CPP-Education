@@ -2,6 +2,56 @@
 
 using namespace std;
 
+class Point {
+private:
+    int x, y;
+
+public:
+    Point() : x(0), y(0) {}
+    Point(int _x, int _y) : x(_x), y(_y) {}
+
+    int getX() const {
+        return x;
+    }
+
+    int getY() const {
+        return y;
+    }
+
+    void setX(int _x) {
+        x = _x;
+    }
+
+    void setY(int _y) {
+        y = _y;
+    }
+
+    Point operator+(const Point& p) const {
+        return Point(x + p.x, y + p.y);
+    }
+
+    Point operator-(const Point& p) const {
+        return Point(x - p.x, y - p.y);
+    }
+
+    Point operator*(int value) const {
+        return Point(x * value, y * value);
+    }
+
+    Point operator/(int value) const {
+        if (value == 0) {
+            cout << "Ошибка: деление на ноль" << endl;
+            return *this;
+        }
+        return Point(x / value, y / value);
+    }
+
+    friend ostream& operator<<(ostream& os, const Point& p) {
+        os << "(" << p.x << ", " << p.y << ")";
+        return os;
+    }
+};
+
 template <typename T>
 class Matrix2D {
     T** ptr;
@@ -18,7 +68,13 @@ public:
     Matrix2D<T> MultiMatrix(const Matrix2D<T>& arr2);
 
     void Input();
+    void InputFromKeyboard();
     void Print() const;
+
+    Matrix2D<T> operator+(const Matrix2D<T>& arr2);
+    Matrix2D<T> operator-(const Matrix2D<T>& arr2);
+    Matrix2D<T> operator*(const Matrix2D<T>& arr2);
+    Matrix2D<T> operator/(const T& value);
 };
 
 template <typename T>
@@ -70,7 +126,7 @@ Matrix2D<T> Matrix2D<T>::SumMatrix(const Matrix2D<T>& arr2) {
     Matrix2D<T> result(str, st);
     for (int i = 0; i < str; i++) {
         for (int j = 0; j < st; j++) {
-            result.ptr[i][j] = this->ptr[i][j] + arr2.ptr[i][j];
+            result.ptr[i][j] = ptr[i][j] + arr2.ptr[i][j];
         }
     }
 
@@ -98,6 +154,16 @@ Matrix2D<T> Matrix2D<T>::MultiMatrix(const Matrix2D<T>& arr2) {
 }
 
 template <typename T>
+void Matrix2D<T>::InputFromKeyboard() {
+    cout << "input matrix elements: " << endl;
+    for (int i = 0; i < str; i++) {
+        for (int j = 0; j < st; j++) {
+            cin >> ptr[i][j];
+        }
+    }
+}
+
+template <typename T>
 void Matrix2D<T>::Input() {
     for (int i = 0; i < str; i++) {
         for (int j = 0; j < st; j++) {
@@ -114,4 +180,75 @@ void Matrix2D<T>::Print() const {
         }
         cout << endl << endl;
     }
+}
+
+template <typename T>
+Matrix2D<T> Matrix2D<T>::operator+(const Matrix2D<T>& arr2) {
+    if (str != arr2.str || st != arr2.st) {
+        cout << "Размеры не совпадают" << endl;
+        return *this;
+    }
+
+    Matrix2D<T> rez(str, st);
+    for (int i = 0; i < str; i++) {
+        for (int j = 0; j < st; j++) {
+            rez.ptr[i][j] = ptr[i][j] + arr2.ptr[i][j];
+        }
+    }
+
+    return rez;
+}
+
+template <typename T>
+Matrix2D<T> Matrix2D<T>::operator-(const Matrix2D<T>& arr2) {
+    if (str != arr2.str || st != arr2.st) {
+        cout << "Размеры не совпадают" << endl;
+        return *this;
+    }
+
+    Matrix2D<T> rez(str, st);
+    for (int i = 0; i < str; i++) {
+        for (int j = 0; j < st; j++) {
+            rez.ptr[i][j] = ptr[i][j] - arr2.ptr[i][j];
+        }
+    }
+
+    return rez;
+}
+
+template <typename T>
+Matrix2D<T> Matrix2D<T>::operator*(const Matrix2D<T>& arr2) {
+    if (st != arr2.str) {
+        cout << "Невозможно перемножить матрицы с такими размерами" << endl;
+        return *this;
+    }
+
+    Matrix2D<T> rez(str, arr2.st);
+    for (int i = 0; i < str; i++) {
+        for (int j = 0; j < arr2.st; j++) {
+            rez.ptr[i][j] = 0;
+            for (int k = 0; k < st; k++) {
+                rez.ptr[i][j] += ptr[i][k] * arr2.ptr[k][j];
+            }
+        }
+    }
+
+    return rez;
+}
+
+template <typename T>
+Matrix2D<T> Matrix2D<T>::operator/(const T& value) {
+    if (value == 0) {
+        cout << "Ошибка: деление на ноль" << endl;
+        return *this;
+    }
+
+    Matrix2D<T> result(str, st);
+    for (int i = 0; i < str; i++) {
+        for (int j = 0; j < st; j++) {
+            result.ptr[i][j] = ptr[i][j] / value;
+        }
+    }
+
+    return result;
 }
