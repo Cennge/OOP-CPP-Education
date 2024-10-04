@@ -3,8 +3,8 @@
 using namespace std;
 class MyString
 {
-	char* str; 
-	int length; 
+	char* str;
+	int length;
 	static int countLiveObj;
 	static int countCreatedObj;
 public:
@@ -14,8 +14,9 @@ public:
 	MyString(const MyString& other);
 	MyString(MyString&& obj);
 	MyString& operator=(MyString&& obj);
+	MyString(initializer_list<char> a);
 	~MyString();
-	
+
 	void MyStrcpy(MyString& obj);
 	bool MyStrStr(const char* substr);
 	int MyChr(char c);
@@ -25,7 +26,7 @@ public:
 	int MyStrCmp(MyString& b);
 
 	MyString& operator+=(const char* appendStr);
-	
+
 	void Print();
 	void Input();
 

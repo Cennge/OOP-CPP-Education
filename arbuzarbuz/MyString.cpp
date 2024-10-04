@@ -72,6 +72,20 @@ MyString& MyString::operator=(MyString&& obj) {
 	return *this;
 }
 
+MyString::MyString(initializer_list<char> a) {
+	length = a.size();
+	str = new char[length + 1];
+
+	for (auto x = a.begin(); x != a.end(); ++x) {
+		*str = *x;
+		str++;
+	}
+
+	*str = '\0';  
+	str -= length;  
+}
+
+
 MyString::~MyString() {
 	delete[] str;
 	countLiveObj--;

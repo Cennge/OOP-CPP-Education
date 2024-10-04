@@ -4,24 +4,27 @@
 using namespace std;
 
 int main() {
-    MyString stringExample("YoYo!!!");
-    cout << "Len = " << stringExample.MyStrLen() << endl;
-    stringExample.Print();
+	MyString stringExample("YoYo!!!");
+	cout << "Len = " << stringExample.MyStrLen() << endl;
+	stringExample.Print();
 
-    stringExample.Input();
-    stringExample.Print();
+	stringExample.Input();
+	stringExample.Print();
 
-    MyString stringExample2("YiYi!!!");
+	MyString stringExample2("YiYi!!!");
 
-    stringExample += " Hello world!";
-    stringExample.Print();
+	stringExample += " Hello world!";
+	stringExample.Print();
 
-    MyString stringExample3;
-    stringExample3 = "Hello, " + stringExample2;
-    stringExample3.Print();
+	MyString stringExample3;
+	stringExample3 = "Hello, " + stringExample2;
+	stringExample3.Print();
 
-    MyString::GetCountLiveObj();
-    MyString::GetCountCreatedObj();
+	MyString::GetCountLiveObj();
+	MyString::GetCountCreatedObj();
 
-    return 0;
+	MyString str{ 'H', 'e', 'l', 'l', 'o', ',', ' ', 'W', 'o', 'r', 'l', 'd', '!' };
+	str.Print();
+
+	return 0;
 }
