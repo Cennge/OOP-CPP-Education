@@ -13,6 +13,17 @@ Vector::Vector(int s)
 	size = s;
 	arr = new int[size] {0};
 }
+Vector::Vector(initializer_list<int> a) {
+	size = a.size();
+	arr = new int[size];
+
+	for (auto x = a.begin(); x != a.end(); x++) {
+		*arr = *x;
+		arr++;
+	}
+	arr -= size;
+}
+
 Vector::~Vector() {
 	delete[]arr;
 	size = 0;
@@ -152,7 +163,7 @@ int Vector::getSize() const {
 }
 
 void Vector::setArray(int* newArr, int newSize) {
-	if (arr != nullptr)	delete[] arr;
+	if (arr != nullptr) delete[] arr;
 	arr = newArr;
 	size = newSize;
 }
@@ -247,76 +258,4 @@ Vector& Vector::operator+=(int a) {
 
 Vector& Vector::operator-=(int a) {
 	if (size >= a) {
-		int* temp = new int[size - a];
-		for (int i = 0; i < size - a; i++) {
-			temp[i] = arr[i];
-		}
-
-		delete[] arr;
-
-		arr = temp;
-		size -= a;
-	}
-
-	return *this;
-
-}
-
-Vector& Vector::operator*=(int a) {
-	for (int i = 0; i < size; i++) {
-		arr[i] *= a;
-	}
-
-	return *this;
-}
-
-Vector& Vector::operator=(const Vector& obj) {
-	if (this == &obj) return *this;
-	if (arr != nullptr) delete[] arr;
-
-	size = obj.size;
-	arr = new int[size];
-	for (int i = 0; i < size; i++) {
-		arr[i] = obj.arr[i];
-	}
-	return *this;
-}
-
-
-ostream& operator<<(ostream& os, Vector obj) {
-	obj.Print();
-	return os;
-}
-
-istream& operator>>(istream& is, Vector& obj) {
-	cout << "Size: ";
-	is >> obj.size;
-
-	if (obj.arr != nullptr) delete[] obj.arr;
-
-	obj.arr = new int[obj.size];
-
-	cout << "Elements: ";
-	for (int i = 0; i < obj.size; i++) {
-		is >> obj.arr[i];
-	}
-
-	return is;
-}
-
-
-Vector operator-(int a, const Vector& obj) {
-	int newSize = obj.getSize() - a;
-	if (newSize <= 0) return Vector();
-
-	int* newArr = new int[newSize];
-
-	for (int i = 0; i < newSize; i++) {
-		newArr[i] = obj.getArray()[i + a];
-	}
-
-	Vector rez;
-	rez.setArray(newArr, newSize);
-
-	return rez;
-}
+		int* temp = new int[size
