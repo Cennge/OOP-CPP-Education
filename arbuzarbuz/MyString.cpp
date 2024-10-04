@@ -265,5 +265,4 @@ ostream& operator<<(ostream& os, MyString obj) {
 istream& operator>>(istream& is, MyString& obj) {
 	obj.Input();
 	return is;
-
 }

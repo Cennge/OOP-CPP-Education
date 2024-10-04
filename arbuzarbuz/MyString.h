@@ -1,4 +1,6 @@
 #pragma once
+#include<iostream>
+using namespace std;
 class MyString
 {
 	char* str; 
@@ -33,6 +35,8 @@ public:
 	MyString operator=(const MyString& obj);
 	MyString operator[](int index);
 	void operator()();
+	friend ostream& operator<<(ostream& os, MyString obj);
+	friend istream& operator>>(istream& is, MyString& obj);
 };
 ostream& operator<<(ostream& os, MyString obj);
 istream& operator>>(istream& is, MyString& obj);
