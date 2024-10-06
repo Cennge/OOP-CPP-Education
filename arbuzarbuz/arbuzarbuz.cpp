@@ -2,11 +2,12 @@
 #include "Matrix2D.h"
 using namespace std;
 
-int main()
-{
-	Matrix2D<Point> arr1(2, 2);
-	arr1.Input();
-	arr1.Print();
+int main() {
+    setlocale(LC_ALL, "Russian");
 
-	return 0;
+    Matrix2D<Point> mat1(2, 2);
+    mat1.Input();
+    mat1.Print();
+
+    return 0;
 }

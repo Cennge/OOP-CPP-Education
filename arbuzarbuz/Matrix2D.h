@@ -9,6 +9,7 @@ private:
 public:
     Point() : x(0), y(0) {}
     Point(int _x, int _y) : x(_x), y(_y) {}
+    Point(int value) : x(value), y(value) {}
 
     int getX() const {
         return x;
@@ -46,9 +47,15 @@ public:
         return Point(x / value, y / value);
     }
 
-    friend ostream& operator<<(ostream& os, const Point& p) {
-        os << "(" << p.x << ", " << p.y << ")";
-        return os;
+    friend istream& operator>>(istream& in, Point& p) {
+        cout << "Введите координаты (x и y) через пробел: ";
+        in >> p.x >> p.y;
+        return in;
+    }
+
+    friend ostream& operator<<(ostream& out, const Point& p) {
+        out << "(" << p.x << ", " << p.y << ")";
+        return out;
     }
 };
 
@@ -75,18 +82,16 @@ public:
     Matrix2D<T> operator-(const Matrix2D<T>& arr2);
     Matrix2D<T> operator*(const Matrix2D<T>& arr2);
     Matrix2D<T> operator/(const T& value);
+
+    // Оператор присваивания
+    Matrix2D<T>& operator=(const Matrix2D<T>& arr);
 };
 
 template <typename T>
-Matrix2D<T>::Matrix2D() {
-    ptr = nullptr;
-    str = st = 0;
-}
+Matrix2D<T>::Matrix2D() : ptr(nullptr), str(0), st(0) {}
 
 template <typename T>
-Matrix2D<T>::Matrix2D(int _str, int _st) {
-    str = _str;
-    st = _st;
+Matrix2D<T>::Matrix2D(int _str, int _st) : str(_str), st(_st) {
     ptr = new T * [str];
     for (int i = 0; i < str; i++) {
         ptr[i] = new T[st]{ 0 };
@@ -94,10 +99,7 @@ Matrix2D<T>::Matrix2D(int _str, int _st) {
 }
 
 template <typename T>
-Matrix2D<T>::Matrix2D(const Matrix2D<T>& arr) {
-    str = arr.str;
-    st = arr.st;
-
+Matrix2D<T>::Matrix2D(const Matrix2D<T>& arr) : str(arr.str), st(arr.st) {
     ptr = new T * [str];
     for (int i = 0; i < str; i++) {
         ptr[i] = new T[st];
@@ -117,10 +119,35 @@ Matrix2D<T>::~Matrix2D() {
 }
 
 template <typename T>
+Matrix2D<T>& Matrix2D<T>::operator=(const Matrix2D<T>& arr) {
+    if (this == &arr) {
+        return *this;
+    }
+
+    for (int i = 0; i < str; i++) {
+        delete[] ptr[i];
+    }
+    delete[] ptr;
+
+    str = arr.str;
+    st = arr.st;
+
+    ptr = new T * [str];
+    for (int i = 0; i < str; i++) {
+        ptr[i] = new T[st];
+        for (int j = 0; j < st; j++) {
+            ptr[i][j] = arr.ptr[i][j];
+        }
+    }
+
+    return *this;
+}
+
+template <typename T>
 Matrix2D<T> Matrix2D<T>::SumMatrix(const Matrix2D<T>& arr2) {
     if (str != arr2.str || st != arr2.st) {
         cout << "Размеры не совпадают" << endl;
-        return *this;
+        return Matrix2D<T>(); // Возвращаем пустую матрицу
     }
 
     Matrix2D<T> result(str, st);
@@ -137,7 +164,7 @@ template <typename T>
 Matrix2D<T> Matrix2D<T>::MultiMatrix(const Matrix2D<T>& arr2) {
     if (st != arr2.str) {
         cout << "Невозможно перемножить матрицы с такими размерами" << endl;
-        return *this;
+        return Matrix2D<T>(); // Возвращаем пустую матрицу
     }
 
     Matrix2D<T> result(str, arr2.st);
@@ -155,7 +182,7 @@ Matrix2D<T> Matrix2D<T>::MultiMatrix(const Matrix2D<T>& arr2) {
 
 template <typename T>
 void Matrix2D<T>::InputFromKeyboard() {
-    cout << "input matrix elements: " << endl;
+    cout << "Введите элементы матрицы: " << endl;
     for (int i = 0; i < str; i++) {
         for (int j = 0; j < st; j++) {
             cin >> ptr[i][j];
@@ -178,32 +205,20 @@ void Matrix2D<T>::Print() const {
         for (int j = 0; j < st; j++) {
             cout << ptr[i][j] << "\t";
         }
-        cout << endl << endl;
+        cout << endl;
     }
 }
 
 template <typename T>
 Matrix2D<T> Matrix2D<T>::operator+(const Matrix2D<T>& arr2) {
-    if (str != arr2.str || st != arr2.st) {
-        cout << "Размеры не совпадают" << endl;
-        return *this;
-    }
-
-    Matrix2D<T> rez(str, st);
-    for (int i = 0; i < str; i++) {
-        for (int j = 0; j < st; j++) {
-            rez.ptr[i][j] = ptr[i][j] + arr2.ptr[i][j];
-        }
-    }
-
-    return rez;
+    return SumMatrix(arr2);
 }
 
 template <typename T>
 Matrix2D<T> Matrix2D<T>::operator-(const Matrix2D<T>& arr2) {
     if (str != arr2.str || st != arr2.st) {
         cout << "Размеры не совпадают" << endl;
-        return *this;
+        return Matrix2D<T>(); // Возвращаем пустую матрицу
     }
 
     Matrix2D<T> rez(str, st);
@@ -218,29 +233,14 @@ Matrix2D<T> Matrix2D<T>::operator-(const Matrix2D<T>& arr2) {
 
 template <typename T>
 Matrix2D<T> Matrix2D<T>::operator*(const Matrix2D<T>& arr2) {
-    if (st != arr2.str) {
-        cout << "Невозможно перемножить матрицы с такими размерами" << endl;
-        return *this;
-    }
-
-    Matrix2D<T> rez(str, arr2.st);
-    for (int i = 0; i < str; i++) {
-        for (int j = 0; j < arr2.st; j++) {
-            rez.ptr[i][j] = 0;
-            for (int k = 0; k < st; k++) {
-                rez.ptr[i][j] += ptr[i][k] * arr2.ptr[k][j];
-            }
-        }
-    }
-
-    return rez;
+    return MultiMatrix(arr2);
 }
 
 template <typename T>
 Matrix2D<T> Matrix2D<T>::operator/(const T& value) {
     if (value == 0) {
         cout << "Ошибка: деление на ноль" << endl;
-        return *this;
+        return Matrix2D<T>(); // Возвращаем пустую матрицу
     }
 
     Matrix2D<T> result(str, st);
