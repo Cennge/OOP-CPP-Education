@@ -132,11 +132,13 @@
     </ClCompile>
     <ClCompile Include="Educator.cpp" />
     <ClCompile Include="Human.cpp" />
+    <ClCompile Include="Lawyer.cpp" />
     <ClCompile Include="Student.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Educator.h" />
     <ClInclude Include="Human.h" />
+    <ClInclude Include="Lawyer.h" />
     <ClInclude Include="Student.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
