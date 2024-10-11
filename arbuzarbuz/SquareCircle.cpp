@@ -4,9 +4,7 @@
 using namespace std;
 
 SquareCircle::SquareCircle() : Square(), Circle() {}
-SquareCircle::SquareCircle(double s, double d) : Square(s), Circle() {
-    setDiameter(d);
-}
+SquareCircle::SquareCircle(double s, double d) : Square(s), Circle(d) {}
 
 bool SquareCircle::canCircleFitInSquare() const {
     return getDiameter() <= getSide();
