@@ -127,15 +127,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Downloads\Point1.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\Point2.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="AirTransport.cpp" />
     <ClCompile Include="arbuzarbuz.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="LandTransport.cpp" />
+    <ClCompile Include="Transport.cpp" />
+    <ClCompile Include="WaterTransport.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AirTransport.h" />
+    <ClInclude Include="LandTransport.h" />
+    <ClInclude Include="Transport.h" />
+    <ClInclude Include="WaterTransport.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
