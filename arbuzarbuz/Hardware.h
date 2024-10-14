@@ -7,15 +7,15 @@ using namespace std;
 class Keyboard {
 private:
 	int price;
-	std::string layout;
+	string layout;
 	bool isMechanical;
 public:
 	int getPrice();
-	std::string getLayout();
+	string getLayout();
 	bool getIsMechanical();
 
 	void setPrice(int p);
-	void setLayout(std::string l);
+	void setLayout(string l);
 	void setIsMechanical(bool m);
 
 	void Output();
@@ -42,15 +42,15 @@ class Headphones {
 private:
 	int price;
 	bool isWireless;
-	std::string type;
+	string type;
 public:
 	int getPrice();
 	bool getIsWireless();
-	std::string getType();
+	string getType();
 
 	void setPrice(int p);
 	void setIsWireless(bool w);
-	void setType(std::string t);
+	void setType(string t);
 
 	void Output();
 };
@@ -59,15 +59,15 @@ class Monitor {
 private:
 	int price;
 	int size;  // in inches
-	std::string resolution;
+	string resolution;
 public:
 	int getPrice();
 	int getSize();
-	std::string getResolution();
+	string getResolution();
 
 	void setPrice(int p);
 	void setSize(int s);
-	void setResolution(std::string r);
+	void setResolution(string r);
 
 	void Output();
 };
