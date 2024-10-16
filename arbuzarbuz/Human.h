@@ -2,13 +2,16 @@
 class Human  // base class
 {
 protected:
-	char* name;
-	int age;
-public:
-	Human();
-	Human(const char*, int);
-	void Output();
-	void Input();
+    char* name;
+    int age;
+    double salary;  
 
-	~Human();
+public:
+    Human();
+    Human(const char*, int, double);  
+    virtual void Output();
+    virtual void Salary(); 
+    void Input();
+
+    virtual ~Human();
 };
