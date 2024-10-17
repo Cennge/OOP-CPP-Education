@@ -1,8 +1,9 @@
 #include "Student.h"
-#include<iostream>
+#include <iostream>
+#include <cstring>
 using namespace std;
 
-Student::Student() : Human()
+Student::Student() : Human() 
 {
     cout << "Construct Student\n";
     Univer = nullptr;
@@ -25,25 +26,26 @@ Student::~Student()
 void Student::Output()
 {
     cout << "Output Student\n";
-    Human::Output();  
+    cout << "Name: " << name << endl;
+    cout << "Age: " << age << endl;
+    cout << "Salary: " << salary << endl;
     cout << "University: " << Univer << endl << endl;
+}
+
+void Student::Salary()
+{
+    cout << "Student's scholarship: " << salary << endl;
 }
 
 void Student::Input(const char* n, int a, double sal, const char* U)
 {
-    if (name != nullptr)
-    {
-        delete[] name;
-    }
-    if (Univer != nullptr)
-    {
-        delete[] Univer;
-    }
+    if (name != nullptr) delete[] name;
+    if (Univer != nullptr) delete[] Univer;
 
     name = new char[strlen(n) + 1];
     strcpy_s(name, strlen(n) + 1, n);
     age = a;
-    salary = sal; 
+    salary = sal;
 
     Univer = new char[strlen(U) + 1];
     strcpy_s(Univer, strlen(U) + 1, U);

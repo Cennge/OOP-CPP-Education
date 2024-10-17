@@ -19,19 +19,6 @@ Human::Human(const char* Name, int Age, double Salary)
     salary = Salary; 
 }
 
-void Human::Output()
-{
-    cout << "Output Human\n";
-    cout << "Name: " << name << endl
-        << "Age: " << age << endl
-        << "Salary: " << salary << endl;  
-}
-
-void Human::Salary()
-{
-    cout << "Current salary: " << salary << endl;  
-}
-
 void Human::Input() 
 {
     if (name != nullptr)

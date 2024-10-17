@@ -1,22 +1,19 @@
 #include "Director.h"
-#include "Human.h"
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
-Director::Director()
+Director::Director() : Human() 
 {
     cout << "Construct Director\n";
-    name = nullptr;
-    age = 30;  // Установим возраст по умолчанию
     Firm = nullptr;
-    Salary = 0.0;
 }
 
-Director::Director(const char* n, int a, const char* companyN, double sal, const char* prog, const char* skillset) : Human(n, a)
+Director::Director(const char* n, int a, double sal, const char* companyN)
+    : Human(n, a, sal)
 {
     cout << "Construct Director\n";
-    Salary = sal;
 
     Firm = new char[strlen(companyN) + 1];
     strcpy_s(Firm, strlen(companyN) + 1, companyN);
@@ -31,12 +28,18 @@ Director::~Director()
 void Director::Output()
 {
     cout << "Output Director\n";
-    Human::Output(); 
-    cout << "Firm: " << Firm << endl;
-    cout << "Salary: " << Salary << endl << endl;
+    cout << "Name: " << name << endl;
+    cout << "Age: " << age << endl;
+    cout << "Salary: " << salary << endl;
+    cout << "Firm: " << Firm << endl << endl;
 }
 
-void Director::Input(const char* n, int a, const char* companyN, double sal, const char* prog, const char* skillset)
+void Director::Salary()
+{
+    cout << "Director's salary: " << salary << endl;
+}
+
+void Director::Input(const char* n, int a, double sal, const char* companyN)
 {
     if (name != nullptr) delete[] name;
     if (Firm != nullptr) delete[] Firm;
@@ -44,9 +47,8 @@ void Director::Input(const char* n, int a, const char* companyN, double sal, con
     name = new char[strlen(n) + 1];
     strcpy_s(name, strlen(n) + 1, n);
     age = a;
+    salary = sal;
 
     Firm = new char[strlen(companyN) + 1];
     strcpy_s(Firm, strlen(companyN) + 1, companyN);
-
-    Salary = sal;
 }

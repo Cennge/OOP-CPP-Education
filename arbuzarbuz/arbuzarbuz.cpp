@@ -1,23 +1,27 @@
-#include "Human.h"
 #include "Student.h"
+#include "Programmer.h"
 #include <iostream>
 using namespace std;
 
 int main()
 {
-    Human* person;
+    Human* people[2];  
 
-    person = new Student("Alex", 20, 2000.0, "Harvard");
+    people[0] = new Student("Alice", 20, 1000.0, "Harvard");
 
-    person->Output();
+    people[1] = new Student("Bob", 18, 1000.0, "Krutoi unik");
 
-    person->Salary();
+    for (int i = 0; i < 2; ++i)
+    {
+        people[i]->Output();
+        people[i]->Salary();  
+        cout << endl;
+    }
 
-    person->Input("John", 21, 2500.0, "MIT");
-
-    person->Output();
-
-    delete person;
+    for (int i = 0; i < 2; ++i)
+    {
+        delete people[i];
+    }
 
     return 0;
 }

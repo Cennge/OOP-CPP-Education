@@ -1,14 +1,18 @@
 #pragma once
 #include "Human.h"
+
 class Programmer : public Human
 {
 protected:
-	char* companyName;
-	int salary;
+    char* companyName;
+
 public:
-	Programmer();
-	Programmer(const char* n, int a, const char* companyN, int sal);
-	~Programmer();
-	void Output();
-	void Input(const char* n, int a, const char* companyN, int sal);
+    Programmer();
+    Programmer(const char* n, int a, double sal, const char* companyN);
+    ~Programmer();
+
+    void Output();
+    void Salary(); 
+
+    void Input(const char* n, int a, double sal, const char* companyN);
 };

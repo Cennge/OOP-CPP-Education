@@ -1,50 +1,57 @@
 #include "Programmer.h"
-#include "Human.h"
 #include <iostream>
 using namespace std;
 
-Programmer::Programmer()
+Programmer::Programmer() : Human()  
 {
-	cout << "Construct programmer\n";
-	name = nullptr;
-	age = 25;
-	companyName = nullptr;
-	salary = 0;
+    cout << "Construct programmer\n";
+    companyName = nullptr;
 }
-Programmer::Programmer(const char* n, int a, const char* companyN, int sal)
+
+Programmer::Programmer(const char* n, int a, double sal, const char* companyN)
+    : Human(n, a, sal) 
 {
-	cout << "Construct programmer\n";
-	salary = sal;
-	companyName = new char[strlen(companyN) + 1];
-	strcpy_s(companyName, strlen(companyN) + 1, companyN);
+    cout << "Construct programmer\n";
+    companyName = new char[strlen(companyN) + 1];
+    strcpy_s(companyName, strlen(companyN) + 1, companyN);
 }
-Programmer:: ~Programmer()
+
+Programmer::~Programmer()
 {
-	if (companyName != nullptr)
-	{
-		delete[] companyName;
-	}
-	cout << "Destruct programmer\n";
+    delete[] companyName;
+    cout << "Destruct programmer\n";
 }
+
 void Programmer::Output()
 {
-	cout << "Output programmer\n";
-	Human::Output();
-
-	cout << "Company name : " << companyName << endl;
-	cout << "Salary: " << salary << endl;
+    cout << "Output programmer\n";
+    cout << "Name: " << name << endl;
+    cout << "Age: " << age << endl;
+    cout << "Salary: " << salary << endl;
+    cout << "Company name: " << companyName << endl;
 }
-void Programmer::Input(const char* n, int a, const char* companyN, int sal)
+
+void Programmer::Salary()
 {
-	if (name != nullptr) delete[] name;
-	if (companyName != nullptr) delete[] companyName;
+    cout << "Programmer's salary: " << salary << endl;
+}
 
-	name = new char[strlen(n) + 1];
-	strcpy_s(name, strlen(n) + 1, n);
-	age = a;
+void Programmer::Input(const char* n, int a, double sal, const char* companyN)
+{
+    if (name != nullptr)
+    {
+        delete[] name;
+    }
+    if (companyName != nullptr)
+    {
+        delete[] companyName;
+    }
 
-	companyName = new char[strlen(companyName) + 1];
-	strcpy_s(companyName, strlen(companyN) + 1, companyN);
+    name = new char[strlen(n) + 1];
+    strcpy_s(name, strlen(n) + 1, n);
+    age = a;
+    salary = sal;
 
-	salary = sal;
+    companyName = new char[strlen(companyN) + 1];
+    strcpy_s(companyName, strlen(companyN) + 1, companyN);
 }

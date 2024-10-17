@@ -1,25 +1,20 @@
 #include "Designer.h"
-#include "Human.h"
 #include <iostream>
-
+#include <cstring>
 using namespace std;
 
-Designer::Designer()
+Designer::Designer() : Human() 
 {
     cout << "Construct Designer\n";
-    name = nullptr;
-    age = 0;
     companyName = nullptr;
-    salary = 0;
     programm = nullptr;
     skills = nullptr;
 }
 
-Designer::Designer(const char* n, int a, const char* companyN, int sal, const char* prog, const char* skillset) : Human(n, a)
+Designer::Designer(const char* n, int a, double sal, const char* companyN, const char* prog, const char* skillset)
+    : Human(n, a, sal) 
 {
     cout << "Construct Designer\n";
-
-    salary = sal;
 
     companyName = new char[strlen(companyN) + 1];
     strcpy_s(companyName, strlen(companyN) + 1, companyN);
@@ -42,14 +37,20 @@ Designer::~Designer()
 void Designer::Output()
 {
     cout << "Output Designer\n";
-    Human::Output();
-    cout << "Company Name: " << companyName << endl;
+    cout << "Name: " << name << endl;
+    cout << "Age: " << age << endl;
     cout << "Salary: " << salary << endl;
+    cout << "Company Name: " << companyName << endl;
     cout << "Program Used: " << programm << endl;
-    cout << "Skills: " << skills << endl << endl;
+    cout << "Skills: " << skills << endl;
 }
 
-void Designer::Input(const char* n, int a, const char* companyN, int sal, const char* prog, const char* skillset)
+void Designer::Salary()
+{
+    cout << "Designer's salary: " << salary << endl;
+}
+
+void Designer::Input(const char* n, int a, double sal, const char* companyN, const char* prog, const char* skillset)
 {
     if (name != nullptr) delete[] name;
     if (companyName != nullptr) delete[] companyName;
@@ -59,11 +60,10 @@ void Designer::Input(const char* n, int a, const char* companyN, int sal, const 
     name = new char[strlen(n) + 1];
     strcpy_s(name, strlen(n) + 1, n);
     age = a;
+    salary = sal;
 
     companyName = new char[strlen(companyN) + 1];
     strcpy_s(companyName, strlen(companyN) + 1, companyN);
-
-    salary = sal;
 
     programm = new char[strlen(prog) + 1];
     strcpy_s(programm, strlen(prog) + 1, prog);
