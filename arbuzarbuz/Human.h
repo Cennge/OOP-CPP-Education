@@ -13,5 +13,5 @@ public:
     virtual void Salary() = 0; 
     void Input();
 
-    virtual ~Human();
+    virtual ~Human() = 0;
 };
