@@ -244,6 +244,16 @@ void MyString::Input() {
 	strcpy_s(str, length + 1, buffer);
 }
 
+void MyString::Save(char* filename)
+{
+	if (filename == nullptr or str == nullptr) return;
+
+	ofstream file(filename);
+	file << str;
+
+	file.close();
+}
+
 void MyString::GetCountLiveObj() {
 	cout << "Number of live objects: " << countLiveObj << endl;
 }

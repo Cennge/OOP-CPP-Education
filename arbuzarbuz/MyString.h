@@ -1,5 +1,6 @@
 #pragma once
 #include<iostream>
+#include<fstream>
 using namespace std;
 class MyString
 {
@@ -29,6 +30,8 @@ public:
 
 	void Print();
 	void Input();
+
+	void Save(char* filename);
 
 	static void GetCountLiveObj();
 	static void GetCountCreatedObj();
