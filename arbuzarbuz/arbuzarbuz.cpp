@@ -1,27 +1,49 @@
-#include "Student.h"
-#include "Programmer.h"
 #include <iostream>
 using namespace std;
 
+class Human
+{
+public:
+	Human() {};
+	Human(string _name, int _age) {
+		name = _name;
+		age = _age;
+	}
+	virtual void Print() {
+		cout << "Name: " << name << endl
+			<< "Age: " << age << endl;
+	}
+
+protected:
+	string name;
+	int age;
+};
+
+class Student : public Human {
+	string Academy;
+public:
+	Student(string _name, int _age, string _academy) : Human(_name, _age) {
+		Academy = _academy;
+	}
+	virtual void Print() {
+		Human::Print();
+		cout << "Academy: " << Academy << endl;
+	}
+	string GetAcad() {
+		return Academy;
+	}
+};
+
+void Task(Human* obj) {
+	obj->Print();
+	string str = dynamic_cast<Student*>(obj)->GetAcad(); //Костыль!!!
+	cout << str << endl
+		;
+}
+
 int main()
 {
-    Human* people[2];  
-
-    people[0] = new Student("Alice", 20, 1000.0, "Harvard");
-
-    people[1] = new Student("Bob", 18, 1000.0, "Krutoi unik");
-
-    for (int i = 0; i < 2; ++i)
-    {
-        people[i]->Output();
-        people[i]->Salary();  
-        cout << endl;
-    }
-
-    for (int i = 0; i < 2; ++i)
-    {
-        delete people[i];
-    }
-
-    return 0;
+	Student obj("Ilya", 18, "Itstep");
+	Task(&obj);
+	return 0;
 }
