@@ -127,9 +127,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Africa.cpp" />
+    <ClCompile Include="AnimalWorld.cpp" />
     <ClCompile Include="arbuzarbuz.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Australia.cpp" />
+    <ClCompile Include="AustralianWolf.cpp" />
+    <ClCompile Include="Bison.cpp" />
+    <ClCompile Include="Carnivore.cpp" />
+    <ClCompile Include="Continent.cpp" />
+    <ClCompile Include="Herbivore.cpp" />
+    <ClCompile Include="Kangaroo.cpp" />
+    <ClCompile Include="Lion.cpp" />
+    <ClCompile Include="NorthAmerica.cpp" />
+    <ClCompile Include="Wildebeest.cpp" />
+    <ClCompile Include="Wolf.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Africa.h" />
+    <ClInclude Include="AnimalWorld.h" />
+    <ClInclude Include="Australia.h" />
+    <ClInclude Include="AustralianWolf.h" />
+    <ClInclude Include="Bison.h" />
+    <ClInclude Include="Carnivore.h" />
+    <ClInclude Include="Continent.h" />
+    <ClInclude Include="Herbivore.h" />
+    <ClInclude Include="Kangaroo.h" />
+    <ClInclude Include="Lion.h" />
+    <ClInclude Include="NorthAmerica.h" />
+    <ClInclude Include="Wildebeest.h" />
+    <ClInclude Include="Wolf.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
