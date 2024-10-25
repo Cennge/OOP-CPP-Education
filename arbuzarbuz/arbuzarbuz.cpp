@@ -1,96 +1,117 @@
 #include <iostream>
-
+#include <fstream>
+#include <string>
+#include <map>
 using namespace std;
 
-class Fractions {
-private:
-    double numerator, denominator;
+void addWord(map<string, string>& dict) {
+	string word, translation;
+	cout << "Введите слово на английском: ";
+	cin >> word;
+	cout << "Введите перевод: ";
+	cin >> translation;
+	dict[word] = translation;
+	cout << "Слово добавлено\n";
+}
 
-public:
-    // Конструкторы
-    Fractions() {
-        numerator = 1;
-        denominator = 1;
-    }
+void deleteWord(map<string, string>& dict) {
+	string word;
+	cout << "Введите слово для удаления: ";
+	cin >> word;
+	auto it = dict.find(word);
+	if (it != dict.end()) {
+		dict.erase(it);
+		cout << "Слово удалено\n";
+	}
+	else {
+		cout << "Слово не найдено\n";
+	}
+}
 
-    Fractions(int a, int b) {
-        if (b == 0) {
-            cout << "Error: Denominator cannot be zero" << endl;
-            numerator = 0;
-            denominator = 1;
-        } else {
-            numerator = a;
-            denominator = b;
-        }
-    }
+void saveWord(map<string, string>& dict) {
+	ofstream file("dictionary.txt");
+	if (file.is_open()) {
+		for (const auto& entry : dict) {
+			file << entry.first << " - " << entry.second << endl;
+		}
+		file.close();
+		cout << "Словарь сохранен в файл\n";
+	}
+	else {
+		cout << "Ошибка при открытии файла\n";
+	}
+}
 
-    // Инициализация
-    void init(int x, int y) {
-        if (y == 0) {
-            cout << "Error: Denominator cannot be zero" << endl;
-            numerator = 0;
-            denominator = 1;
-        } else {
-            numerator = x;
-            denominator = y;
-        }
-    }
+void searchWord(map<string, string>& dict) {
+	string s;
+	cout << "Введите слово для поиска -> ";
+	cin >> s;
+	auto ptrf = dict.find(s);
+	if (ptrf != dict.end())
+	{
+		system("cls");
+		system("color 0B");
+		cout << ptrf->second << endl;
+	}
+	else
+	{
+		system("cls");
+		system("color 0C");
+	}
+}
 
-    // Вывод дроби
-    void printFraction() {
-        cout << numerator << " / " << denominator << endl;
-    }
+void displayDictionary(const map<string, string>& dict) {
+	cout << "Словарь:\n";
+	for (const auto& entry : dict) {
+		cout << entry.first << " - " << entry.second << endl;
+	}
+}
 
-    // Арифметические операции
-    Fractions Sum(Fractions& b) {
-        Fractions rez(numerator + b.numerator, denominator + b.denominator);
-        return rez;
-    }
+int main()
+{	
+	setlocale(LC_ALL, "Russian");
+	map<string, string> dict;
+	dict.insert(make_pair("dog", "собака"));
+	dict.insert(make_pair("cat", "кошка"));
+	dict.insert(make_pair("parrot", "попугай"));
 
-    Fractions Minus(Fractions& b) {
-        Fractions rez(numerator - b.numerator, denominator - b.denominator);
-        return rez;
-    }
+	int choice;
+	do {
+		cout << "\nМеню:\n";
+		cout << "1. Добавить слово\n";
+		cout << "2. Удалить слово\n";
+		cout << "3. Найти слово\n";
+		cout << "4. Сохранить в файл\n";
+		cout << "5. Показать словарь\n";
+		cout << "0. Выйти\n";
+		cout << "Выберите действие: ";
+		cin >> choice;
 
-    Fractions Multiplication(Fractions& b) {
-        Fractions rez(numerator * b.numerator, denominator * b.denominator);
-        return rez;
-    }
+		switch (choice) {
+		case 1:
+			addWord(dict);
+			break;
+		case 2:
+			deleteWord(dict);
+			break;
+		case 3:
+			searchWord(dict);
+			break;
+		case 4:
+			saveWord(dict);
+			break;
+		case 5:
+			displayDictionary(dict);
+			break;
+		case 0:
+			cout << "Выход\n";
+			break;
+		default:
+			cout << "Error\n";
+		}
+	} while (choice != 0);
 
-    Fractions Divide(Fractions& b) {
-        Fractions rez(numerator / b.numerator, denominator / b.denominator);
-        return rez;
-    }
+	return 0;
 
-    // Сеттеры и геттеры
-    void setNumerator(int a) {
-        numerator = a;
-    }
 
-    void setDenominator(int b) {
-        if (b == 0) {
-            cout << "Error: Denominator cannot be zero" << endl;
-            denominator = 1;
-        } else {
-            denominator = b;
-        }
-    }
-
-    int getNumerator() {
-        return numerator;
-    }
-
-    int getDenominator() {
-        return denominator;
-    }
-};
-
-int main() {
-    Fractions frac1(2, 4);
-    Fractions frac2(3, 5);
-
-    Fractions result = frac1.Sum(frac2);
-    result.printFraction();
-
-    return 0;
 }
